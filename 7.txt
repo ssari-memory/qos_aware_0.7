@@ -1,0 +1,2001 @@
+sim-outorder: SimpleScalar/Alpha Tool Set version 3.0 of August, 2003.
+Copyright (c) 1994-2003 by Todd M. Austin, Ph.D. and SimpleScalar, LLC.
+All Rights Reserved. This version of SimpleScalar is licensed for academic
+non-commercial use.  No portion of this work may be used by any commercial
+entity, or for any commercial purpose, without the prior written permission
+of SimpleScalar, LLC (info@simplescalar.com).
+
+
+Processor Parameters:
+Issue Width: 8
+Window Size: 224
+Number of Virtual Registers: 32
+Number of Physical Registers: 256
+Datapath Width: 64
+Total Power Consumption: 184.293
+Branch Predictor Power Consumption: 4.52313  (2.48%)
+ branch target buffer power (W): 4.16837
+ local predict power (W): 0.0879711
+ global predict power (W): 0.0996078
+ chooser power (W): 0.0702439
+ RAS power (W): 0.0969383
+Rename Logic Power Consumption: 1.59467  (0.875%)
+ Instruction Decode Power (W): 0.0319831
+ RAT decode_power (W): 0.227029
+ RAT wordline_power (W): 0.113697
+ RAT bitline_power (W): 1.17106
+ DCL Comparators (W): 0.0509018
+Instruction Window Power Consumption: 40.9008  (22.4%)
+ tagdrive (W): 2.06229
+ tagmatch (W): 0.800991
+ Selection Logic (W): 0.177166
+ decode_power (W): 2.33844
+ wordline_power (W): 0.288569
+ bitline_power (W): 35.2333
+Load/Store Queue Power Consumption: 7.97181  (4.37%)
+ tagdrive (W): 3.75392
+ tagmatch (W): 1.61248
+ decode_power (W): 0.181222
+ wordline_power (W): 0.0150119
+ bitline_power (W): 2.40917
+Arch. Register File Power Consumption: 9.39491  (5.15%)
+ decode_power (W): 0.227029
+ wordline_power (W): 0.288569
+ bitline_power (W): 8.87931
+Result Bus Power Consumption: 29.5114  (16.2%)
+Total Clock Power: 40.5427  (22.2%)
+Int ALU Power: 4.66013  (2.56%)
+FP ALU Power: 14.281  (7.83%)
+Instruction Cache Power Consumption: 4.17363  (2.29%)
+ decode_power (W): 0.724888
+ wordline_power (W): 0.0983677
+ bitline_power (W): 2.29383
+ senseamp_power (W): 0.384
+ tagarray_power (W): 0.672547
+Itlb_power (W): 0.263924 (0.145%)
+Data Cache Power Consumption: 8.34726  (4.58%)
+ decode_power (W): 1.44978
+ wordline_power (W): 0.196735
+ bitline_power (W): 4.58765
+ senseamp_power (W): 0.768
+ tagarray_power (W): 1.34509
+Dtlb_power (W): 0.900717 (0.494%)
+Level 2 Cache Power Consumption: 15.2267 (8.35%)
+ decode_power (W): 0.916695
+ wordline_power (W): 0.0841435
+ bitline_power (W): 11.0554
+ senseamp_power (W): 0.384
+ tagarray_power (W): 2.78646
+sim-main: initalizing context 0:bwavesNS.1.arg
+args: 0:./bwaves.base.alpha 
+sim: loading binary...
+sim: loading ./bwaves.base.alpha
+sim-main: initalizing context 1:h264refNS.1.arg
+args: 0:./h264ref.base.alpha 1:-d 2:./foreman_ref_encoder_baseline.cfg 
+sim: loading binary...
+sim: loading ./h264ref.base.alpha
+warning: section `.comment' ignored...
+sim-main: initalizing context 2:gccNS.1.arg
+args: 0:./gcc.base.alpha 1:./166.i 2:-o 3:./166.s 
+sim: loading binary...
+sim: loading ./gcc.base.alpha
+warning: section `.comment' ignored...
+sim-main: initalizing context 3:bzip2NS.1.arg
+args: 0:./bzip2.base.alpha 1:./input.source 2:280 
+sim: loading binary...
+sim: loading ./bzip2.base.alpha
+sim: command line: ../m-sim_v2.0.t1/sim-outorder bwavesNS.1.arg h264refNS.1.arg gccNS.1.arg bzip2NS.1.arg 
+
+sim: simulation started @ Tue Aug  9 19:02:57 2022, options follow:
+
+sim-outorder: This simulator implements a very detailed out-of-order issue
+superscalar processor with a two-level memory system and speculative
+execution support.  This simulator is a performance simulator, tracking the
+latency of all pipeline operations.
+
+# -config                     # load configuration from a file
+# -dumpconfig                 # dump configuration to a file
+# -h                    false # print help message    
+# -v                    false # verbose operation     
+# -d                    false # enable debug message  
+# -i                    false # start in Dlite debugger
+-seed                       1 # random number generator seed (0 for timer seed)
+# -q                    false # initialize and terminate immediately
+# -redir:sim           <null> # redirect simulator output to file (non-interactive only)
+# -redir:prog          <null> # redirect simulated program output to file
+-nice                       0 # simulator scheduling priority
+-max:inst           250000000 # maximum number of inst's to execute
+-fastfwd             10000000 # number of insts skipped before timing starts
+# -ptrace              <null> # generate pipetrace, i.e., <fname|stdout|stderr> <range>
+-fetch:speed                1 # speed of front-end of machine relative to execution core
+-bpred                  bimod # branch predictor type {nottaken|taken|perfect|bimod|2lev|comb}
+-bpred:bimod     2048 # bimodal predictor config (<table size>)
+-bpred:2lev      1 1024 8 0 # 2-level predictor config (<l1size> <l2size> <hist_size> <xor>)
+-bpred:comb      1024 # combining predictor config (<meta_table_size>)
+-bpred:ras                  8 # return address stack size (0 for no return stack)
+-bpred:btb       512 4 # BTB config (<num_sets> <associativity>)
+# -bpred:spec_update       <null> # speculative predictors update in {ID|WB} (default non-spec)
+-cpred                  bimod # cache load-latency predictor type {nottaken|taken|perfect|bimod|2lev|comb}
+-cpred:bimod     2048 # cache load-latency bimodal predictor config (<table size>)
+-cpred:2lev      1 1024 8 0 # cache load-latency 2-level predictor config (<l1size> <l2size> <hist_size> <xor>)
+-cpred:comb      1024 # cache load-latency combining predictor config (<meta_table_size>)
+-cpred:ras                  0 # return address stack size (0 for no return stack)
+-cpred:btb       512 4 # cache load-latency BTB config (<num_sets> <associativity>)
+-decode:width               8 # instruction decode B/W (insts/cycle)
+-issue:width                8 # instruction issue B/W (insts/cycle)
+-issue:inorder          false # run pipeline with in-order issue
+-issue:wrongpath         true # issue instructions down wrong execution paths
+-commit:width               8 # instruction commit B/W (insts/cycle)
+-rob:size                 224 # reorder buffer (ROB) size
+-fetch:policy |icount|round_robin|       icount # fetch policy          
+-recovery:model        squash # Alpha squash recovery or perfect predition: |squash|perfect|
+-iq:size                   96 # issue queue (IQ) size 
+-qos                       70 # Quality of Service of the first VIP thread
+-iq:issue_exec_delay            1 # minimum cycles between issue and execution
+-fetch_rename_delay            4 # number of cycles between fetch and rename stages
+-rename_dispatch_delay            1 # number cycles between rename and dispatch stages
+-rf:size                  256 # register file (RF) size for each the INT and FP physical register file)
+-lsq:size                 128 # load/store queue (LSQ) size
+-cache:dl1       dl1:256:32:4:l # l1 data cache config, i.e., {<config>|none}
+-cache:dl1lat               4 # l1 data cache hit latency (in cycles)
+-cache:dl2       ul2:4096:64:8:l # l2 data cache config, i.e., {<config>|none}
+-cache:dl2lat              40 # l2 data cache hit latency (in cycles)
+-cache:il1       il1:256:32:4:l # l1 inst cache config, i.e., {<config>|dl1|dl2|none}
+-cache:il1lat               1 # l1 instruction cache hit latency (in cycles)
+-cache:il2                dl2 # l2 instruction cache config, i.e., {<config>|dl2|none}
+-cache:il2lat              40 # l2 instruction cache hit latency (in cycles)
+-cache:flush            false # flush caches on system calls
+-cache:icompress        false # convert 64-bit inst addresses to 32-bit inst equivalents
+-mem:lat         200 2 # memory access latency (<first_chunk> <inter_chunk>)
+-mem:width                  8 # memory access bus width (in bytes)
+-tlb:itlb        itlb:16:4096:4:l # instruction TLB config, i.e., {<config>|none}
+-tlb:dtlb        dtlb:32:4096:4:l # data TLB config, i.e., {<config>|none}
+-tlb:lat                   30 # inst/data TLB miss latency (in cycles)
+-res:ialu                   4 # total number of integer ALU's available
+-res:imult                  1 # total number of integer multiplier/dividers available
+-res:memport                2 # total number of memory system ports available (to CPU)
+-res:fpalu                  4 # total number of floating point ALU's available
+-res:fpmult                 1 # total number of floating point multiplier/dividers available
+# -pcstat              <null> # profile stat(s) against text addr's (mult uses ok)
+-power:print_stats         true # print power statistics collected by wattch?
+
+  Pipetrace range arguments are formatted as follows:
+
+    {{@|#}<start>}:{{@|#|+}<end>}
+
+  Both ends of the range are optional, if neither are specified, the entire
+  execution is traced.  Ranges that start with a `@' designate an address
+  range to be traced, those that start with an `#' designate a cycle count
+  range.  All other range values represent an instruction count range.  The
+  second argument, if specified with a `+', indicates a value relative
+  to the first argument, e.g., 1000:+100 == 1000:1100.  Program symbols may
+  be used in all contexts.
+
+    Examples:   -ptrace FOO.trc #0:#1000
+                -ptrace BAR.trc @2000:
+                -ptrace BLAH.trc :1500
+                -ptrace UXXE.trc :
+                -ptrace FOOBAR.trc @main:+278
+
+  Branch predictor configuration examples for 2-level predictor:
+    Configurations:   N, M, W, X
+      N   # entries in first level (# of shift register(s))
+      W   width of shift register(s)
+      M   # entries in 2nd level (# of counters, or other FSM)
+      X   (yes-1/no-0) xor history and address for 2nd level index
+    Sample predictors:
+      GAg     : 1, W, 2^W, 0
+      GAp     : 1, W, M (M > 2^W), 0
+      PAg     : N, W, 2^W, 0
+      PAp     : N, W, M (M == 2^(N+W)), 0
+      gshare  : 1, W, 2^W, 1
+  Predictor `comb' combines a bimodal and a 2-level predictor.
+
+  The cache config parameter <config> has the following format:
+
+    <name>:<nsets>:<bsize>:<assoc>:<repl>
+
+    <name>   - name of the cache being defined
+    <nsets>  - number of sets in the cache
+    <bsize>  - block size of the cache
+    <assoc>  - associativity of the cache
+    <repl>   - block replacement strategy, 'l'-LRU, 'f'-FIFO, 'r'-random
+
+    Examples:   -cache:dl1 dl1:4096:32:1:l
+                -dtlb dtlb:128:4096:32:r
+
+  Cache levels can be unified by pointing a level of the instruction cache
+  hierarchy at the data cache hiearchy using the "dl1" and "dl2" cache
+  configuration arguments.  Most sensible combinations are supported, e.g.,
+
+    A unified l2 cache (il2 is pointed at dl2):
+      -cache:il1 il1:128:64:1:l -cache:il2 dl2
+      -cache:dl1 dl1:256:32:1:l -cache:dl2 ul2:1024:64:2:l
+
+    Or, a fully unified cache hierarchy (il1 pointed at dl1):
+      -cache:il1 dl1
+      -cache:dl1 ul1:256:32:1:l -cache:dl2 ul2:1024:64:2:l
+
+
+
+sim: ** fast forwarding insts **
+warning: partially supported sigaction() call...
+warning: unsupported ioctl call: ioctl(536900702, ...)
+sim: ** starting performance simulation **
+EPOCH 1
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7389
+LPT1: ROB: 51, LSQ: 30, IQ: 23 IPC[1]: 0.7403
+LPT2: ROB: 52, LSQ: 30, IQ: 23 IPC[2]: 0.7727
+LPT3: ROB: 49, LSQ: 28, IQ: 22 IPC[3]: 0.2096
+EPOCH 2
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7367
+LPT1: ROB: 58, LSQ: 33, IQ: 25 IPC[1]: 0.7378
+LPT2: ROB: 59, LSQ: 34, IQ: 25 IPC[2]: 0.7915
+LPT3: ROB: 51, LSQ: 29, IQ: 22 IPC[3]: 0.2078
+EPOCH 3
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7447
+LPT1: ROB: 53, LSQ: 30, IQ: 24 IPC[1]: 0.7001
+LPT2: ROB: 55, LSQ: 32, IQ: 24 IPC[2]: 0.8284
+LPT3: ROB: 44, LSQ: 26, IQ: 20 IPC[3]: 0.2079
+EPOCH 4
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7581
+LPT1: ROB: 59, LSQ: 33, IQ: 25 IPC[1]: 0.6764
+LPT2: ROB: 63, LSQ: 36, IQ: 26 IPC[2]: 0.8392
+LPT3: ROB: 46, LSQ: 27, IQ: 21 IPC[3]: 0.2066
+EPOCH 5
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7558
+LPT1: ROB: 54, LSQ: 31, IQ: 24 IPC[1]: 0.6859
+LPT2: ROB: 59, LSQ: 34, IQ: 25 IPC[2]: 0.8405
+LPT3: ROB: 39, LSQ: 23, IQ: 19 IPC[3]: 0.2064
+EPOCH 6
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7440
+LPT1: ROB: 61, LSQ: 34, IQ: 26 IPC[1]: 0.6885
+LPT2: ROB: 66, LSQ: 37, IQ: 27 IPC[2]: 0.8319
+LPT3: ROB: 41, LSQ: 25, IQ: 19 IPC[3]: 0.2054
+EPOCH 7
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7358
+LPT1: ROB: 57, LSQ: 32, IQ: 25 IPC[1]: 0.7129
+LPT2: ROB: 61, LSQ: 34, IQ: 26 IPC[2]: 0.8139
+LPT3: ROB: 34, LSQ: 22, IQ: 17 IPC[3]: 0.2053
+EPOCH 8
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7335
+LPT1: ROB: 63, LSQ: 35, IQ: 27 IPC[1]: 0.7106
+LPT2: ROB: 68, LSQ: 37, IQ: 28 IPC[2]: 0.8091
+LPT3: ROB: 37, LSQ: 24, IQ: 17 IPC[3]: 0.2044
+EPOCH 9
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7303
+LPT1: ROB: 58, LSQ: 32, IQ: 26 IPC[1]: 0.7048
+LPT2: ROB: 64, LSQ: 35, IQ: 27 IPC[2]: 0.8127
+LPT3: ROB: 30, LSQ: 21, IQ: 15 IPC[3]: 0.2042
+EPOCH 10
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7251
+LPT1: ROB: 54, LSQ: 30, IQ: 25 IPC[1]: 0.7304
+LPT2: ROB: 59, LSQ: 32, IQ: 26 IPC[2]: 0.8125
+LPT3: ROB: 23, LSQ: 18, IQ: 13 IPC[3]: 0.2033
+EPOCH 11
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7259
+LPT1: ROB: 60, LSQ: 33, IQ: 27 IPC[1]: 0.7254
+LPT2: ROB: 65, LSQ: 35, IQ: 27 IPC[2]: 0.7989
+LPT3: ROB: 27, LSQ: 20, IQ: 14 IPC[3]: 0.2022
+EPOCH 12
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7227
+LPT1: ROB: 67, LSQ: 36, IQ: 29 IPC[1]: 0.7287
+LPT2: ROB: 71, LSQ: 38, IQ: 28 IPC[2]: 0.7871
+LPT3: ROB: 30, LSQ: 22, IQ: 15 IPC[3]: 0.2018
+EPOCH 13
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7208
+LPT1: ROB: 64, LSQ: 34, IQ: 28 IPC[1]: 0.7588
+LPT2: ROB: 64, LSQ: 35, IQ: 26 IPC[2]: 0.7509
+LPT3: ROB: 24, LSQ: 19, IQ: 14 IPC[3]: 0.2014
+EPOCH 14
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7169
+LPT1: ROB: 69, LSQ: 37, IQ: 29 IPC[1]: 0.7390
+LPT2: ROB: 70, LSQ: 38, IQ: 28 IPC[2]: 0.7380
+LPT3: ROB: 29, LSQ: 21, IQ: 15 IPC[3]: 0.2012
+EPOCH 15
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7132
+LPT1: ROB: 69, LSQ: 37, IQ: 29 IPC[1]: 0.7400
+LPT2: ROB: 70, LSQ: 38, IQ: 28 IPC[2]: 0.7241
+LPT3: ROB: 29, LSQ: 21, IQ: 15 IPC[3]: 0.2012
+EPOCH 16
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7059
+LPT1: ROB: 65, LSQ: 35, IQ: 28 IPC[1]: 0.7526
+LPT2: ROB: 65, LSQ: 35, IQ: 27 IPC[2]: 0.7218
+LPT3: ROB: 22, LSQ: 18, IQ: 13 IPC[3]: 0.2009
+EPOCH 17
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7053
+LPT1: ROB: 71, LSQ: 38, IQ: 29 IPC[1]: 0.7498
+LPT2: ROB: 71, LSQ: 38, IQ: 29 IPC[2]: 0.7221
+LPT3: ROB: 26, LSQ: 20, IQ: 14 IPC[3]: 0.2002
+EPOCH 18
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7012
+LPT1: ROB: 71, LSQ: 38, IQ: 29 IPC[1]: 0.7407
+LPT2: ROB: 71, LSQ: 38, IQ: 29 IPC[2]: 0.7216
+LPT3: ROB: 26, LSQ: 20, IQ: 14 IPC[3]: 0.2000
+EPOCH 19
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7002
+LPT1: ROB: 66, LSQ: 36, IQ: 28 IPC[1]: 0.7451
+LPT2: ROB: 66, LSQ: 35, IQ: 28 IPC[2]: 0.7191
+LPT3: ROB: 20, LSQ: 17, IQ: 12 IPC[3]: 0.1999
+EPOCH 20
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.6945
+LPT1: ROB: 61, LSQ: 33, IQ: 27 IPC[1]: 0.7478
+LPT2: ROB: 61, LSQ: 33, IQ: 27 IPC[2]: 0.7288
+LPT3: ROB: 14, LSQ: 14, IQ: 10 IPC[3]: 0.1991
+EPOCH 21
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6992
+LPT1: ROB: 66, LSQ: 35, IQ: 28 IPC[1]: 0.7404
+LPT2: ROB: 68, LSQ: 36, IQ: 29 IPC[2]: 0.7323
+LPT3: ROB: 18, LSQ: 17, IQ: 11 IPC[3]: 0.1980
+EPOCH 22
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6997
+LPT1: ROB: 72, LSQ: 38, IQ: 29 IPC[1]: 0.7374
+LPT2: ROB: 74, LSQ: 39, IQ: 30 IPC[2]: 0.7303
+LPT3: ROB: 22, LSQ: 19, IQ: 13 IPC[3]: 0.1975
+EPOCH 23
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6986
+LPT1: ROB: 67, LSQ: 36, IQ: 28 IPC[1]: 0.7374
+LPT2: ROB: 69, LSQ: 36, IQ: 29 IPC[2]: 0.7280
+LPT3: ROB: 16, LSQ: 16, IQ: 11 IPC[3]: 0.1970
+EPOCH 24
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7000
+LPT1: ROB: 62, LSQ: 33, IQ: 27 IPC[1]: 0.7379
+LPT2: ROB: 64, LSQ: 34, IQ: 28 IPC[2]: 0.7388
+LPT3: ROB: 10, LSQ: 13, IQ: 9 IPC[3]: 0.1962
+EPOCH 25
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7004
+LPT1: ROB: 67, LSQ: 35, IQ: 28 IPC[1]: 0.7317
+LPT2: ROB: 71, LSQ: 37, IQ: 30 IPC[2]: 0.7432
+LPT3: ROB: 14, LSQ: 16, IQ: 10 IPC[3]: 0.1948
+EPOCH 26
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6970
+LPT1: ROB: 73, LSQ: 38, IQ: 30 IPC[1]: 0.7317
+LPT2: ROB: 76, LSQ: 40, IQ: 31 IPC[2]: 0.7399
+LPT3: ROB: 19, LSQ: 18, IQ: 11 IPC[3]: 0.1939
+EPOCH 27
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6934
+LPT1: ROB: 69, LSQ: 36, IQ: 29 IPC[1]: 0.7374
+LPT2: ROB: 70, LSQ: 37, IQ: 30 IPC[2]: 0.7342
+LPT3: ROB: 13, LSQ: 15, IQ: 9 IPC[3]: 0.1935
+EPOCH 28
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6952
+LPT1: ROB: 74, LSQ: 38, IQ: 30 IPC[1]: 0.7339
+LPT2: ROB: 77, LSQ: 40, IQ: 32 IPC[2]: 0.7417
+LPT3: ROB: 17, LSQ: 18, IQ: 10 IPC[3]: 0.1928
+EPOCH 29
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6922
+LPT1: ROB: 69, LSQ: 35, IQ: 29 IPC[1]: 0.7303
+LPT2: ROB: 72, LSQ: 38, IQ: 31 IPC[2]: 0.7448
+LPT3: ROB: 11, LSQ: 15, IQ: 8 IPC[3]: 0.1922
+EPOCH 30
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6934
+LPT1: ROB: 74, LSQ: 38, IQ: 30 IPC[1]: 0.7289
+LPT2: ROB: 77, LSQ: 41, IQ: 32 IPC[2]: 0.7431
+LPT3: ROB: 17, LSQ: 17, IQ: 10 IPC[3]: 0.1914
+EPOCH 31
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6948
+LPT1: ROB: 69, LSQ: 35, IQ: 29 IPC[1]: 0.7278
+LPT2: ROB: 72, LSQ: 38, IQ: 31 IPC[2]: 0.7409
+LPT3: ROB: 11, LSQ: 15, IQ: 8 IPC[3]: 0.1911
+EPOCH 32
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6883
+LPT1: ROB: 75, LSQ: 38, IQ: 30 IPC[1]: 0.7273
+LPT2: ROB: 77, LSQ: 41, IQ: 32 IPC[2]: 0.7408
+LPT3: ROB: 16, LSQ: 17, IQ: 10 IPC[3]: 0.1903
+EPOCH 33
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6863
+LPT1: ROB: 70, LSQ: 35, IQ: 29 IPC[1]: 0.7239
+LPT2: ROB: 72, LSQ: 39, IQ: 31 IPC[2]: 0.7423
+LPT3: ROB: 10, LSQ: 14, IQ: 8 IPC[3]: 0.1898
+EPOCH 34
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6888
+LPT1: ROB: 75, LSQ: 38, IQ: 30 IPC[1]: 0.7223
+LPT2: ROB: 77, LSQ: 42, IQ: 32 IPC[2]: 0.7402
+LPT3: ROB: 16, LSQ: 16, IQ: 10 IPC[3]: 0.1891
+EPOCH 35
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6866
+LPT1: ROB: 70, LSQ: 35, IQ: 29 IPC[1]: 0.7218
+LPT2: ROB: 72, LSQ: 39, IQ: 31 IPC[2]: 0.7392
+LPT3: ROB: 10, LSQ: 14, IQ: 8 IPC[3]: 0.1887
+EPOCH 36
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.6875
+LPT1: ROB: 65, LSQ: 32, IQ: 28 IPC[1]: 0.7236
+LPT2: ROB: 67, LSQ: 37, IQ: 30 IPC[2]: 0.7457
+LPT3: ROB: 4, LSQ: 11, IQ: 6 IPC[3]: 0.1880
+EPOCH 37
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6894
+LPT1: ROB: 69, LSQ: 34, IQ: 29 IPC[1]: 0.7200
+LPT2: ROB: 73, LSQ: 40, IQ: 31 IPC[2]: 0.7479
+LPT3: ROB: 10, LSQ: 14, IQ: 8 IPC[3]: 0.1864
+EPOCH 38
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6917
+LPT1: ROB: 74, LSQ: 36, IQ: 30 IPC[1]: 0.7166
+LPT2: ROB: 78, LSQ: 43, IQ: 32 IPC[2]: 0.7474
+LPT3: ROB: 16, LSQ: 17, IQ: 10 IPC[3]: 0.1859
+EPOCH 39
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6920
+LPT1: ROB: 74, LSQ: 36, IQ: 30 IPC[1]: 0.7165
+LPT2: ROB: 78, LSQ: 43, IQ: 32 IPC[2]: 0.7452
+LPT3: ROB: 16, LSQ: 17, IQ: 10 IPC[3]: 0.1858
+EPOCH 40
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6920
+LPT1: ROB: 69, LSQ: 33, IQ: 29 IPC[1]: 0.7178
+LPT2: ROB: 73, LSQ: 41, IQ: 31 IPC[2]: 0.7520
+LPT3: ROB: 10, LSQ: 14, IQ: 8 IPC[3]: 0.1856
+EPOCH 41
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6914
+LPT1: ROB: 74, LSQ: 36, IQ: 30 IPC[1]: 0.7176
+LPT2: ROB: 79, LSQ: 44, IQ: 32 IPC[2]: 0.7536
+LPT3: ROB: 15, LSQ: 16, IQ: 10 IPC[3]: 0.1851
+EPOCH 42
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6933
+LPT1: ROB: 74, LSQ: 36, IQ: 30 IPC[1]: 0.7111
+LPT2: ROB: 79, LSQ: 44, IQ: 32 IPC[2]: 0.7523
+LPT3: ROB: 15, LSQ: 16, IQ: 10 IPC[3]: 0.1850
+EPOCH 43
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.6954
+LPT1: ROB: 74, LSQ: 36, IQ: 30 IPC[1]: 0.7002
+LPT2: ROB: 79, LSQ: 44, IQ: 32 IPC[2]: 0.7566
+LPT3: ROB: 15, LSQ: 16, IQ: 10 IPC[3]: 0.1849
+EPOCH 44
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.6969
+LPT1: ROB: 68, LSQ: 33, IQ: 29 IPC[1]: 0.6977
+LPT2: ROB: 74, LSQ: 42, IQ: 31 IPC[2]: 0.7619
+LPT3: ROB: 10, LSQ: 13, IQ: 8 IPC[3]: 0.1847
+EPOCH 45
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7018
+LPT1: ROB: 72, LSQ: 35, IQ: 30 IPC[1]: 0.6933
+LPT2: ROB: 81, LSQ: 45, IQ: 33 IPC[2]: 0.7659
+LPT3: ROB: 15, LSQ: 16, IQ: 9 IPC[3]: 0.1843
+EPOCH 46
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7076
+LPT1: ROB: 72, LSQ: 35, IQ: 30 IPC[1]: 0.6823
+LPT2: ROB: 81, LSQ: 45, IQ: 33 IPC[2]: 0.7700
+LPT3: ROB: 15, LSQ: 16, IQ: 9 IPC[3]: 0.1841
+EPOCH 47
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7067
+LPT1: ROB: 72, LSQ: 35, IQ: 30 IPC[1]: 0.6761
+LPT2: ROB: 81, LSQ: 45, IQ: 33 IPC[2]: 0.7667
+LPT3: ROB: 15, LSQ: 16, IQ: 9 IPC[3]: 0.1838
+EPOCH 48
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7090
+LPT1: ROB: 67, LSQ: 32, IQ: 29 IPC[1]: 0.6779
+LPT2: ROB: 76, LSQ: 42, IQ: 32 IPC[2]: 0.7697
+LPT3: ROB: 9, LSQ: 14, IQ: 7 IPC[3]: 0.1836
+EPOCH 49
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7101
+LPT1: ROB: 70, LSQ: 33, IQ: 30 IPC[1]: 0.6702
+LPT2: ROB: 83, LSQ: 45, IQ: 34 IPC[2]: 0.7713
+LPT3: ROB: 15, LSQ: 18, IQ: 8 IPC[3]: 0.1831
+EPOCH 50
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7159
+LPT1: ROB: 63, LSQ: 29, IQ: 28 IPC[1]: 0.6599
+LPT2: ROB: 80, LSQ: 43, IQ: 33 IPC[2]: 0.7793
+LPT3: ROB: 9, LSQ: 16, IQ: 7 IPC[3]: 0.1830
+EPOCH 51
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7172
+LPT1: ROB: 57, LSQ: 26, IQ: 27 IPC[1]: 0.6575
+LPT2: ROB: 75, LSQ: 41, IQ: 32 IPC[2]: 0.7838
+LPT3: ROB: 4, LSQ: 13, IQ: 5 IPC[3]: 0.1825
+EPOCH 52
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7180
+LPT1: ROB: 63, LSQ: 29, IQ: 29 IPC[1]: 0.6603
+LPT2: ROB: 80, LSQ: 44, IQ: 33 IPC[2]: 0.7866
+LPT3: ROB: 9, LSQ: 15, IQ: 6 IPC[3]: 0.1812
+EPOCH 53
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7224
+LPT1: ROB: 66, LSQ: 31, IQ: 30 IPC[1]: 0.6547
+LPT2: ROB: 87, LSQ: 48, IQ: 35 IPC[2]: 0.7929
+LPT3: ROB: 15, LSQ: 17, IQ: 7 IPC[3]: 0.1809
+EPOCH 54
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7192
+LPT1: ROB: 61, LSQ: 29, IQ: 29 IPC[1]: 0.6612
+LPT2: ROB: 82, LSQ: 45, IQ: 34 IPC[2]: 0.7970
+LPT3: ROB: 9, LSQ: 14, IQ: 5 IPC[3]: 0.1806
+EPOCH 55
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7236
+LPT1: ROB: 64, LSQ: 31, IQ: 30 IPC[1]: 0.6561
+LPT2: ROB: 89, LSQ: 48, IQ: 36 IPC[2]: 0.8013
+LPT3: ROB: 15, LSQ: 17, IQ: 6 IPC[3]: 0.1803
+EPOCH 56
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7268
+LPT1: ROB: 58, LSQ: 28, IQ: 29 IPC[1]: 0.6529
+LPT2: ROB: 84, LSQ: 46, IQ: 35 IPC[2]: 0.8060
+LPT3: ROB: 10, LSQ: 14, IQ: 4 IPC[3]: 0.1802
+EPOCH 57
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7267
+LPT1: ROB: 53, LSQ: 25, IQ: 28 IPC[1]: 0.6528
+LPT2: ROB: 79, LSQ: 43, IQ: 34 IPC[2]: 0.8097
+LPT3: ROB: 4, LSQ: 12, IQ: 2 IPC[3]: 0.1797
+EPOCH 58
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7296
+LPT1: ROB: 54, LSQ: 26, IQ: 28 IPC[1]: 0.6437
+LPT2: ROB: 86, LSQ: 46, IQ: 36 IPC[2]: 0.8122
+LPT3: ROB: 12, LSQ: 16, IQ: 4 IPC[3]: 0.1790
+EPOCH 59
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7325
+LPT1: ROB: 58, LSQ: 28, IQ: 29 IPC[1]: 0.6402
+LPT2: ROB: 92, LSQ: 49, IQ: 38 IPC[2]: 0.8148
+LPT3: ROB: 18, LSQ: 19, IQ: 5 IPC[3]: 0.1787
+EPOCH 60
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7323
+LPT1: ROB: 54, LSQ: 26, IQ: 28 IPC[1]: 0.6431
+LPT2: ROB: 86, LSQ: 46, IQ: 37 IPC[2]: 0.8163
+LPT3: ROB: 12, LSQ: 16, IQ: 3 IPC[3]: 0.1786
+EPOCH 61
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7358
+LPT1: ROB: 58, LSQ: 28, IQ: 29 IPC[1]: 0.6401
+LPT2: ROB: 92, LSQ: 49, IQ: 38 IPC[2]: 0.8187
+LPT3: ROB: 18, LSQ: 19, IQ: 5 IPC[3]: 0.1784
+EPOCH 62
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7355
+LPT1: ROB: 58, LSQ: 28, IQ: 29 IPC[1]: 0.6315
+LPT2: ROB: 92, LSQ: 49, IQ: 38 IPC[2]: 0.8188
+LPT3: ROB: 18, LSQ: 19, IQ: 5 IPC[3]: 0.1784
+EPOCH 63
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7381
+LPT1: ROB: 51, LSQ: 25, IQ: 27 IPC[1]: 0.6249
+LPT2: ROB: 88, LSQ: 47, IQ: 37 IPC[2]: 0.8232
+LPT3: ROB: 13, LSQ: 16, IQ: 4 IPC[3]: 0.1784
+EPOCH 64
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7394
+LPT1: ROB: 57, LSQ: 28, IQ: 28 IPC[1]: 0.6242
+LPT2: ROB: 93, LSQ: 50, IQ: 38 IPC[2]: 0.8249
+LPT3: ROB: 18, LSQ: 18, IQ: 6 IPC[3]: 0.1783
+EPOCH 65
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7398
+LPT1: ROB: 57, LSQ: 28, IQ: 28 IPC[1]: 0.6239
+LPT2: ROB: 93, LSQ: 50, IQ: 38 IPC[2]: 0.8221
+LPT3: ROB: 18, LSQ: 18, IQ: 6 IPC[3]: 0.1782
+EPOCH 66
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7398
+LPT1: ROB: 52, LSQ: 26, IQ: 27 IPC[1]: 0.6251
+LPT2: ROB: 87, LSQ: 47, IQ: 37 IPC[2]: 0.8209
+LPT3: ROB: 13, LSQ: 15, IQ: 4 IPC[3]: 0.1781
+EPOCH 67
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7411
+LPT1: ROB: 56, LSQ: 28, IQ: 28 IPC[1]: 0.6213
+LPT2: ROB: 93, LSQ: 50, IQ: 39 IPC[2]: 0.8236
+LPT3: ROB: 19, LSQ: 18, IQ: 5 IPC[3]: 0.1781
+EPOCH 68
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7404
+LPT1: ROB: 51, LSQ: 26, IQ: 27 IPC[1]: 0.6214
+LPT2: ROB: 88, LSQ: 47, IQ: 38 IPC[2]: 0.8245
+LPT3: ROB: 13, LSQ: 15, IQ: 3 IPC[3]: 0.1780
+EPOCH 69
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7419
+LPT1: ROB: 59, LSQ: 30, IQ: 29 IPC[1]: 0.6252
+LPT2: ROB: 91, LSQ: 48, IQ: 39 IPC[2]: 0.8193
+LPT3: ROB: 18, LSQ: 18, IQ: 4 IPC[3]: 0.1779
+EPOCH 70
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7405
+LPT1: ROB: 55, LSQ: 28, IQ: 28 IPC[1]: 0.6270
+LPT2: ROB: 85, LSQ: 45, IQ: 37 IPC[2]: 0.8157
+LPT3: ROB: 12, LSQ: 15, IQ: 3 IPC[3]: 0.1778
+EPOCH 71
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7397
+LPT1: ROB: 61, LSQ: 31, IQ: 30 IPC[1]: 0.6280
+LPT2: ROB: 89, LSQ: 47, IQ: 38 IPC[2]: 0.8146
+LPT3: ROB: 18, LSQ: 18, IQ: 4 IPC[3]: 0.1775
+EPOCH 72
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7396
+LPT1: ROB: 56, LSQ: 28, IQ: 29 IPC[1]: 0.6271
+LPT2: ROB: 84, LSQ: 44, IQ: 37 IPC[2]: 0.8162
+LPT3: ROB: 12, LSQ: 16, IQ: 2 IPC[3]: 0.1775
+EPOCH 73
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7423
+LPT1: ROB: 65, LSQ: 33, IQ: 31 IPC[1]: 0.6331
+LPT2: ROB: 85, LSQ: 45, IQ: 37 IPC[2]: 0.8082
+LPT3: ROB: 18, LSQ: 18, IQ: 4 IPC[3]: 0.1772
+EPOCH 74
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7431
+LPT1: ROB: 65, LSQ: 33, IQ: 31 IPC[1]: 0.6377
+LPT2: ROB: 85, LSQ: 45, IQ: 37 IPC[2]: 0.7990
+LPT3: ROB: 18, LSQ: 18, IQ: 4 IPC[3]: 0.1772
+EPOCH 75
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7455
+LPT1: ROB: 61, LSQ: 31, IQ: 30 IPC[1]: 0.6414
+LPT2: ROB: 79, LSQ: 42, IQ: 36 IPC[2]: 0.7973
+LPT3: ROB: 12, LSQ: 15, IQ: 2 IPC[3]: 0.1772
+EPOCH 76
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7492
+LPT1: ROB: 56, LSQ: 29, IQ: 29 IPC[1]: 0.6439
+LPT2: ROB: 73, LSQ: 39, IQ: 35 IPC[2]: 0.7964
+LPT3: ROB: 7, LSQ: 12, IQ: 2 IPC[3]: 0.1769
+EPOCH 77
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7536
+LPT1: ROB: 62, LSQ: 32, IQ: 31 IPC[1]: 0.6462
+LPT2: ROB: 76, LSQ: 41, IQ: 36 IPC[2]: 0.7932
+LPT3: ROB: 14, LSQ: 15, IQ: 3 IPC[3]: 0.1764
+EPOCH 78
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7561
+LPT1: ROB: 71, LSQ: 37, IQ: 33 IPC[1]: 0.6523
+LPT2: ROB: 77, LSQ: 42, IQ: 36 IPC[2]: 0.7851
+LPT3: ROB: 20, LSQ: 17, IQ: 5 IPC[3]: 0.1763
+EPOCH 79
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7553
+LPT1: ROB: 71, LSQ: 37, IQ: 33 IPC[1]: 0.6553
+LPT2: ROB: 77, LSQ: 42, IQ: 36 IPC[2]: 0.7799
+LPT3: ROB: 20, LSQ: 17, IQ: 5 IPC[3]: 0.1765
+EPOCH 80
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7540
+LPT1: ROB: 67, LSQ: 35, IQ: 32 IPC[1]: 0.6610
+LPT2: ROB: 71, LSQ: 39, IQ: 34 IPC[2]: 0.7761
+LPT3: ROB: 14, LSQ: 14, IQ: 4 IPC[3]: 0.1765
+EPOCH 81
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7540
+LPT1: ROB: 61, LSQ: 32, IQ: 31 IPC[1]: 0.6619
+LPT2: ROB: 66, LSQ: 37, IQ: 33 IPC[2]: 0.7794
+LPT3: ROB: 9, LSQ: 11, IQ: 2 IPC[3]: 0.1764
+EPOCH 82
+
+HPT : ROB: 104, LSQ: 56, IQ: 32 IPC[0]: 1.7536
+LPT1: ROB: 55, LSQ: 29, IQ: 30 IPC[1]: 0.6636
+LPT2: ROB: 61, LSQ: 35, IQ: 32 IPC[2]: 0.7839
+LPT3: ROB: 4, LSQ: 8, IQ: 2 IPC[3]: 0.1760
+EPOCH 83
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7529
+LPT1: ROB: 60, LSQ: 32, IQ: 31 IPC[1]: 0.6657
+LPT2: ROB: 66, LSQ: 37, IQ: 33 IPC[2]: 0.7851
+LPT3: ROB: 10, LSQ: 11, IQ: 4 IPC[3]: 0.1754
+EPOCH 84
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7550
+LPT1: ROB: 66, LSQ: 35, IQ: 33 IPC[1]: 0.6672
+LPT2: ROB: 69, LSQ: 39, IQ: 34 IPC[2]: 0.7809
+LPT3: ROB: 17, LSQ: 14, IQ: 5 IPC[3]: 0.1752
+EPOCH 85
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7552
+LPT1: ROB: 61, LSQ: 33, IQ: 32 IPC[1]: 0.6693
+LPT2: ROB: 63, LSQ: 36, IQ: 33 IPC[2]: 0.7786
+LPT3: ROB: 12, LSQ: 11, IQ: 3 IPC[3]: 0.1752
+EPOCH 86
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7548
+LPT1: ROB: 67, LSQ: 36, IQ: 33 IPC[1]: 0.6705
+LPT2: ROB: 68, LSQ: 38, IQ: 34 IPC[2]: 0.7775
+LPT3: ROB: 17, LSQ: 14, IQ: 5 IPC[3]: 0.1751
+EPOCH 87
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7550
+LPT1: ROB: 62, LSQ: 34, IQ: 32 IPC[1]: 0.6711
+LPT2: ROB: 62, LSQ: 35, IQ: 33 IPC[2]: 0.7745
+LPT3: ROB: 12, LSQ: 11, IQ: 3 IPC[3]: 0.1751
+EPOCH 88
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7560
+LPT1: ROB: 67, LSQ: 36, IQ: 33 IPC[1]: 0.6706
+LPT2: ROB: 68, LSQ: 38, IQ: 34 IPC[2]: 0.7750
+LPT3: ROB: 17, LSQ: 14, IQ: 5 IPC[3]: 0.1749
+EPOCH 89
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7553
+LPT1: ROB: 62, LSQ: 34, IQ: 32 IPC[1]: 0.6733
+LPT2: ROB: 62, LSQ: 35, IQ: 33 IPC[2]: 0.7742
+LPT3: ROB: 12, LSQ: 11, IQ: 3 IPC[3]: 0.1749
+EPOCH 90
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7536
+LPT1: ROB: 70, LSQ: 38, IQ: 34 IPC[1]: 0.6756
+LPT2: ROB: 63, LSQ: 36, IQ: 33 IPC[2]: 0.7674
+LPT3: ROB: 19, LSQ: 14, IQ: 5 IPC[3]: 0.1748
+EPOCH 91
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7531
+LPT1: ROB: 78, LSQ: 42, IQ: 34 IPC[1]: 0.6772
+LPT2: ROB: 65, LSQ: 37, IQ: 33 IPC[2]: 0.7609
+LPT3: ROB: 25, LSQ: 17, IQ: 5 IPC[3]: 0.1749
+EPOCH 92
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7511
+LPT1: ROB: 73, LSQ: 39, IQ: 33 IPC[1]: 0.6780
+LPT2: ROB: 60, LSQ: 34, IQ: 32 IPC[2]: 0.7592
+LPT3: ROB: 19, LSQ: 15, IQ: 3 IPC[3]: 0.1751
+EPOCH 93
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7507
+LPT1: ROB: 68, LSQ: 36, IQ: 32 IPC[1]: 0.6796
+LPT2: ROB: 55, LSQ: 32, IQ: 31 IPC[2]: 0.7604
+LPT3: ROB: 13, LSQ: 12, IQ: 1 IPC[3]: 0.1750
+EPOCH 94
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7479
+LPT1: ROB: 74, LSQ: 39, IQ: 33 IPC[1]: 0.6789
+LPT2: ROB: 57, LSQ: 33, IQ: 32 IPC[2]: 0.7546
+LPT3: ROB: 21, LSQ: 16, IQ: 3 IPC[3]: 0.1748
+EPOCH 95
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7466
+LPT1: ROB: 80, LSQ: 42, IQ: 35 IPC[1]: 0.6800
+LPT2: ROB: 62, LSQ: 35, IQ: 33 IPC[2]: 0.7518
+LPT3: ROB: 26, LSQ: 19, IQ: 4 IPC[3]: 0.1748
+EPOCH 96
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7453
+LPT1: ROB: 76, LSQ: 40, IQ: 34 IPC[1]: 0.6829
+LPT2: ROB: 56, LSQ: 32, IQ: 31 IPC[2]: 0.7484
+LPT3: ROB: 20, LSQ: 16, IQ: 3 IPC[3]: 0.1749
+EPOCH 97
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7436
+LPT1: ROB: 81, LSQ: 42, IQ: 35 IPC[1]: 0.6817
+LPT2: ROB: 62, LSQ: 35, IQ: 32 IPC[2]: 0.7467
+LPT3: ROB: 25, LSQ: 19, IQ: 5 IPC[3]: 0.1750
+EPOCH 98
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7420
+LPT1: ROB: 81, LSQ: 42, IQ: 35 IPC[1]: 0.6811
+LPT2: ROB: 62, LSQ: 35, IQ: 32 IPC[2]: 0.7447
+LPT3: ROB: 25, LSQ: 19, IQ: 5 IPC[3]: 0.1752
+EPOCH 99
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7433
+LPT1: ROB: 78, LSQ: 40, IQ: 34 IPC[1]: 0.6861
+LPT2: ROB: 55, LSQ: 31, IQ: 30 IPC[2]: 0.7388
+LPT3: ROB: 19, LSQ: 17, IQ: 4 IPC[3]: 0.1753
+EPOCH 100
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7419
+LPT1: ROB: 85, LSQ: 43, IQ: 36 IPC[1]: 0.6883
+LPT2: ROB: 59, LSQ: 33, IQ: 31 IPC[2]: 0.7359
+LPT3: ROB: 24, LSQ: 20, IQ: 5 IPC[3]: 0.1753
+EPOCH 101
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7401
+LPT1: ROB: 85, LSQ: 43, IQ: 36 IPC[1]: 0.6860
+LPT2: ROB: 59, LSQ: 33, IQ: 31 IPC[2]: 0.7358
+LPT3: ROB: 24, LSQ: 20, IQ: 5 IPC[3]: 0.1755
+EPOCH 102
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7384
+LPT1: ROB: 80, LSQ: 40, IQ: 35 IPC[1]: 0.6870
+LPT2: ROB: 54, LSQ: 30, IQ: 30 IPC[2]: 0.7342
+LPT3: ROB: 18, LSQ: 18, IQ: 3 IPC[3]: 0.1756
+EPOCH 103
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7373
+LPT1: ROB: 85, LSQ: 43, IQ: 36 IPC[1]: 0.6875
+LPT2: ROB: 60, LSQ: 33, IQ: 31 IPC[2]: 0.7326
+LPT3: ROB: 23, LSQ: 20, IQ: 5 IPC[3]: 0.1756
+EPOCH 104
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7361
+LPT1: ROB: 79, LSQ: 40, IQ: 35 IPC[1]: 0.6883
+LPT2: ROB: 56, LSQ: 31, IQ: 30 IPC[2]: 0.7337
+LPT3: ROB: 17, LSQ: 17, IQ: 3 IPC[3]: 0.1756
+EPOCH 105
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7349
+LPT1: ROB: 83, LSQ: 42, IQ: 36 IPC[1]: 0.6871
+LPT2: ROB: 62, LSQ: 34, IQ: 31 IPC[2]: 0.7323
+LPT3: ROB: 23, LSQ: 20, IQ: 5 IPC[3]: 0.1756
+EPOCH 106
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7349
+LPT1: ROB: 77, LSQ: 39, IQ: 35 IPC[1]: 0.6864
+LPT2: ROB: 58, LSQ: 32, IQ: 30 IPC[2]: 0.7339
+LPT3: ROB: 17, LSQ: 17, IQ: 3 IPC[3]: 0.1757
+EPOCH 107
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7343
+LPT1: ROB: 82, LSQ: 42, IQ: 36 IPC[1]: 0.6864
+LPT2: ROB: 63, LSQ: 35, IQ: 31 IPC[2]: 0.7323
+LPT3: ROB: 23, LSQ: 19, IQ: 5 IPC[3]: 0.1757
+EPOCH 108
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7328
+LPT1: ROB: 76, LSQ: 39, IQ: 35 IPC[1]: 0.6869
+LPT2: ROB: 58, LSQ: 33, IQ: 30 IPC[2]: 0.7330
+LPT3: ROB: 18, LSQ: 16, IQ: 3 IPC[3]: 0.1758
+EPOCH 109
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7327
+LPT1: ROB: 81, LSQ: 42, IQ: 36 IPC[1]: 0.6866
+LPT2: ROB: 63, LSQ: 36, IQ: 31 IPC[2]: 0.7313
+LPT3: ROB: 24, LSQ: 18, IQ: 5 IPC[3]: 0.1758
+EPOCH 110
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7318
+LPT1: ROB: 75, LSQ: 39, IQ: 35 IPC[1]: 0.6860
+LPT2: ROB: 59, LSQ: 34, IQ: 30 IPC[2]: 0.7323
+LPT3: ROB: 18, LSQ: 15, IQ: 3 IPC[3]: 0.1759
+EPOCH 111
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7319
+LPT1: ROB: 77, LSQ: 40, IQ: 36 IPC[1]: 0.6822
+LPT2: ROB: 67, LSQ: 38, IQ: 32 IPC[2]: 0.7324
+LPT3: ROB: 24, LSQ: 18, IQ: 4 IPC[3]: 0.1759
+EPOCH 112
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7328
+LPT1: ROB: 71, LSQ: 37, IQ: 34 IPC[1]: 0.6803
+LPT2: ROB: 62, LSQ: 36, IQ: 31 IPC[2]: 0.7326
+LPT3: ROB: 19, LSQ: 15, IQ: 3 IPC[3]: 0.1760
+EPOCH 113
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7332
+LPT1: ROB: 65, LSQ: 34, IQ: 33 IPC[1]: 0.6796
+LPT2: ROB: 57, LSQ: 34, IQ: 30 IPC[2]: 0.7328
+LPT3: ROB: 14, LSQ: 12, IQ: 1 IPC[3]: 0.1759
+EPOCH 114
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7341
+LPT1: ROB: 67, LSQ: 35, IQ: 33 IPC[1]: 0.6754
+LPT2: ROB: 65, LSQ: 38, IQ: 32 IPC[2]: 0.7337
+LPT3: ROB: 20, LSQ: 15, IQ: 3 IPC[3]: 0.1757
+EPOCH 115
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7346
+LPT1: ROB: 69, LSQ: 36, IQ: 34 IPC[1]: 0.6717
+LPT2: ROB: 73, LSQ: 42, IQ: 34 IPC[2]: 0.7351
+LPT3: ROB: 26, LSQ: 18, IQ: 4 IPC[3]: 0.1757
+EPOCH 116
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7367
+LPT1: ROB: 64, LSQ: 34, IQ: 33 IPC[1]: 0.6721
+LPT2: ROB: 68, LSQ: 39, IQ: 33 IPC[2]: 0.7346
+LPT3: ROB: 20, LSQ: 15, IQ: 2 IPC[3]: 0.1758
+EPOCH 117
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7381
+LPT1: ROB: 58, LSQ: 31, IQ: 31 IPC[1]: 0.6704
+LPT2: ROB: 64, LSQ: 37, IQ: 32 IPC[2]: 0.7366
+LPT3: ROB: 14, LSQ: 12, IQ: 1 IPC[3]: 0.1758
+EPOCH 118
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7382
+LPT1: ROB: 62, LSQ: 33, IQ: 32 IPC[1]: 0.6680
+LPT2: ROB: 70, LSQ: 40, IQ: 33 IPC[2]: 0.7363
+LPT3: ROB: 20, LSQ: 15, IQ: 3 IPC[3]: 0.1755
+EPOCH 119
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7394
+LPT1: ROB: 65, LSQ: 34, IQ: 33 IPC[1]: 0.6652
+LPT2: ROB: 78, LSQ: 44, IQ: 35 IPC[2]: 0.7383
+LPT3: ROB: 25, LSQ: 18, IQ: 4 IPC[3]: 0.1756
+EPOCH 120
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7412
+LPT1: ROB: 61, LSQ: 32, IQ: 32 IPC[1]: 0.6673
+LPT2: ROB: 72, LSQ: 41, IQ: 34 IPC[2]: 0.7373
+LPT3: ROB: 19, LSQ: 15, IQ: 2 IPC[3]: 0.1756
+EPOCH 121
+
+HPT : ROB: 88, LSQ: 48, IQ: 32 IPC[0]: 1.7408
+LPT1: ROB: 55, LSQ: 29, IQ: 30 IPC[1]: 0.6656
+LPT2: ROB: 68, LSQ: 39, IQ: 33 IPC[2]: 0.7392
+LPT3: ROB: 13, LSQ: 12, IQ: 1 IPC[3]: 0.1756
+EPOCH 122
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7410
+LPT1: ROB: 56, LSQ: 29, IQ: 30 IPC[1]: 0.6607
+LPT2: ROB: 76, LSQ: 43, IQ: 35 IPC[2]: 0.7400
+LPT3: ROB: 20, LSQ: 16, IQ: 3 IPC[3]: 0.1754
+EPOCH 123
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7410
+LPT1: ROB: 58, LSQ: 30, IQ: 31 IPC[1]: 0.6567
+LPT2: ROB: 84, LSQ: 47, IQ: 37 IPC[2]: 0.7410
+LPT3: ROB: 26, LSQ: 19, IQ: 4 IPC[3]: 0.1754
+EPOCH 124
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7421
+LPT1: ROB: 58, LSQ: 30, IQ: 31 IPC[1]: 0.6538
+LPT2: ROB: 84, LSQ: 47, IQ: 37 IPC[2]: 0.7426
+LPT3: ROB: 26, LSQ: 19, IQ: 4 IPC[3]: 0.1756
+EPOCH 125
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7428
+LPT1: ROB: 53, LSQ: 28, IQ: 30 IPC[1]: 0.6536
+LPT2: ROB: 78, LSQ: 44, IQ: 36 IPC[2]: 0.7412
+LPT3: ROB: 21, LSQ: 16, IQ: 2 IPC[3]: 0.1757
+EPOCH 126
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7414
+LPT1: ROB: 49, LSQ: 26, IQ: 29 IPC[1]: 0.6545
+LPT2: ROB: 72, LSQ: 41, IQ: 35 IPC[2]: 0.7407
+LPT3: ROB: 15, LSQ: 13, IQ: 2 IPC[3]: 0.1756
+EPOCH 127
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7418
+LPT1: ROB: 56, LSQ: 30, IQ: 31 IPC[1]: 0.6546
+LPT2: ROB: 75, LSQ: 42, IQ: 36 IPC[2]: 0.7376
+LPT3: ROB: 21, LSQ: 16, IQ: 3 IPC[3]: 0.1755
+EPOCH 128
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7426
+LPT1: ROB: 51, LSQ: 28, IQ: 30 IPC[1]: 0.6548
+LPT2: ROB: 70, LSQ: 39, IQ: 35 IPC[2]: 0.7379
+LPT3: ROB: 15, LSQ: 13, IQ: 1 IPC[3]: 0.1755
+EPOCH 129
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7423
+LPT1: ROB: 55, LSQ: 30, IQ: 31 IPC[1]: 0.6530
+LPT2: ROB: 76, LSQ: 42, IQ: 36 IPC[2]: 0.7378
+LPT3: ROB: 21, LSQ: 16, IQ: 3 IPC[3]: 0.1753
+EPOCH 130
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7434
+LPT1: ROB: 50, LSQ: 27, IQ: 30 IPC[1]: 0.6537
+LPT2: ROB: 71, LSQ: 39, IQ: 35 IPC[2]: 0.7396
+LPT3: ROB: 15, LSQ: 14, IQ: 1 IPC[3]: 0.1753
+EPOCH 131
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7457
+LPT1: ROB: 52, LSQ: 28, IQ: 31 IPC[1]: 0.6503
+LPT2: ROB: 79, LSQ: 43, IQ: 37 IPC[2]: 0.7421
+LPT3: ROB: 21, LSQ: 17, IQ: 2 IPC[3]: 0.1751
+EPOCH 132
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7466
+LPT1: ROB: 45, LSQ: 25, IQ: 29 IPC[1]: 0.6472
+LPT2: ROB: 75, LSQ: 41, IQ: 36 IPC[2]: 0.7451
+LPT3: ROB: 16, LSQ: 14, IQ: 1 IPC[3]: 0.1751
+EPOCH 133
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7483
+LPT1: ROB: 52, LSQ: 29, IQ: 31 IPC[1]: 0.6484
+LPT2: ROB: 79, LSQ: 43, IQ: 37 IPC[2]: 0.7450
+LPT3: ROB: 21, LSQ: 16, IQ: 2 IPC[3]: 0.1749
+EPOCH 134
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7494
+LPT1: ROB: 47, LSQ: 27, IQ: 30 IPC[1]: 0.6489
+LPT2: ROB: 74, LSQ: 40, IQ: 36 IPC[2]: 0.7465
+LPT3: ROB: 15, LSQ: 13, IQ: 2 IPC[3]: 0.1749
+EPOCH 135
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7512
+LPT1: ROB: 50, LSQ: 28, IQ: 31 IPC[1]: 0.6460
+LPT2: ROB: 82, LSQ: 44, IQ: 38 IPC[2]: 0.7489
+LPT3: ROB: 20, LSQ: 16, IQ: 3 IPC[3]: 0.1748
+EPOCH 136
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7511
+LPT1: ROB: 52, LSQ: 29, IQ: 31 IPC[1]: 0.6422
+LPT2: ROB: 90, LSQ: 48, IQ: 38 IPC[2]: 0.7499
+LPT3: ROB: 26, LSQ: 19, IQ: 3 IPC[3]: 0.1748
+EPOCH 137
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7470
+LPT1: ROB: 52, LSQ: 29, IQ: 31 IPC[1]: 0.6384
+LPT2: ROB: 90, LSQ: 48, IQ: 38 IPC[2]: 0.7464
+LPT3: ROB: 26, LSQ: 19, IQ: 3 IPC[3]: 0.1748
+EPOCH 138
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7471
+LPT1: ROB: 52, LSQ: 29, IQ: 31 IPC[1]: 0.6379
+LPT2: ROB: 90, LSQ: 48, IQ: 38 IPC[2]: 0.7455
+LPT3: ROB: 26, LSQ: 19, IQ: 3 IPC[3]: 0.1749
+EPOCH 139
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7478
+LPT1: ROB: 52, LSQ: 29, IQ: 31 IPC[1]: 0.6385
+LPT2: ROB: 90, LSQ: 48, IQ: 38 IPC[2]: 0.7427
+LPT3: ROB: 26, LSQ: 19, IQ: 3 IPC[3]: 0.1750
+EPOCH 140
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7498
+LPT1: ROB: 46, LSQ: 26, IQ: 30 IPC[1]: 0.6369
+LPT2: ROB: 85, LSQ: 46, IQ: 37 IPC[2]: 0.7441
+LPT3: ROB: 21, LSQ: 16, IQ: 1 IPC[3]: 0.1751
+EPOCH 141
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7505
+LPT1: ROB: 42, LSQ: 24, IQ: 29 IPC[1]: 0.6381
+LPT2: ROB: 79, LSQ: 43, IQ: 36 IPC[2]: 0.7448
+LPT3: ROB: 15, LSQ: 13, IQ: 1 IPC[3]: 0.1750
+EPOCH 142
+
+HPT : ROB: 104, LSQ: 56, IQ: 32 IPC[0]: 1.7515
+LPT1: ROB: 37, LSQ: 22, IQ: 28 IPC[1]: 0.6392
+LPT2: ROB: 73, LSQ: 40, IQ: 35 IPC[2]: 0.7459
+LPT3: ROB: 10, LSQ: 10, IQ: 1 IPC[3]: 0.1748
+EPOCH 143
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7526
+LPT1: ROB: 43, LSQ: 25, IQ: 29 IPC[1]: 0.6389
+LPT2: ROB: 78, LSQ: 42, IQ: 36 IPC[2]: 0.7467
+LPT3: ROB: 15, LSQ: 13, IQ: 3 IPC[3]: 0.1746
+EPOCH 144
+
+HPT : ROB: 104, LSQ: 56, IQ: 32 IPC[0]: 1.7535
+LPT1: ROB: 38, LSQ: 23, IQ: 28 IPC[1]: 0.6399
+LPT2: ROB: 72, LSQ: 39, IQ: 35 IPC[2]: 0.7476
+LPT3: ROB: 10, LSQ: 10, IQ: 1 IPC[3]: 0.1745
+EPOCH 145
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7546
+LPT1: ROB: 45, LSQ: 26, IQ: 30 IPC[1]: 0.6409
+LPT2: ROB: 76, LSQ: 41, IQ: 36 IPC[2]: 0.7479
+LPT3: ROB: 15, LSQ: 13, IQ: 2 IPC[3]: 0.1743
+EPOCH 146
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7557
+LPT1: ROB: 51, LSQ: 29, IQ: 32 IPC[1]: 0.6410
+LPT2: ROB: 81, LSQ: 43, IQ: 37 IPC[2]: 0.7480
+LPT3: ROB: 20, LSQ: 16, IQ: 3 IPC[3]: 0.1742
+EPOCH 147
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7568
+LPT1: ROB: 46, LSQ: 27, IQ: 31 IPC[1]: 0.6416
+LPT2: ROB: 76, LSQ: 40, IQ: 36 IPC[2]: 0.7488
+LPT3: ROB: 14, LSQ: 13, IQ: 1 IPC[3]: 0.1742
+EPOCH 148
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7582
+LPT1: ROB: 41, LSQ: 25, IQ: 30 IPC[1]: 0.6420
+LPT2: ROB: 70, LSQ: 37, IQ: 35 IPC[2]: 0.7492
+LPT3: ROB: 9, LSQ: 10, IQ: 1 IPC[3]: 0.1741
+EPOCH 149
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7596
+LPT1: ROB: 46, LSQ: 28, IQ: 31 IPC[1]: 0.6416
+LPT2: ROB: 75, LSQ: 39, IQ: 36 IPC[2]: 0.7497
+LPT3: ROB: 15, LSQ: 13, IQ: 3 IPC[3]: 0.1739
+EPOCH 150
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7606
+LPT1: ROB: 41, LSQ: 26, IQ: 30 IPC[1]: 0.6427
+LPT2: ROB: 69, LSQ: 36, IQ: 35 IPC[2]: 0.7504
+LPT3: ROB: 10, LSQ: 10, IQ: 1 IPC[3]: 0.1738
+EPOCH 151
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7618
+LPT1: ROB: 47, LSQ: 29, IQ: 32 IPC[1]: 0.6433
+LPT2: ROB: 73, LSQ: 38, IQ: 36 IPC[2]: 0.7505
+LPT3: ROB: 16, LSQ: 13, IQ: 2 IPC[3]: 0.1736
+EPOCH 152
+
+HPT : ROB: 104, LSQ: 56, IQ: 28 IPC[0]: 1.7629
+LPT1: ROB: 42, LSQ: 27, IQ: 31 IPC[1]: 0.6439
+LPT2: ROB: 67, LSQ: 35, IQ: 35 IPC[2]: 0.7507
+LPT3: ROB: 11, LSQ: 10, IQ: 2 IPC[3]: 0.1736
+EPOCH 153
+
+HPT : ROB: 88, LSQ: 48, IQ: 24 IPC[0]: 1.7635
+LPT1: ROB: 47, LSQ: 30, IQ: 32 IPC[1]: 0.6435
+LPT2: ROB: 72, LSQ: 37, IQ: 36 IPC[2]: 0.7504
+LPT3: ROB: 17, LSQ: 13, IQ: 4 IPC[3]: 0.1735
+EPOCH 154
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7639
+LPT1: ROB: 56, LSQ: 34, IQ: 32 IPC[1]: 0.6449
+LPT2: ROB: 73, LSQ: 38, IQ: 36 IPC[2]: 0.7466
+LPT3: ROB: 23, LSQ: 16, IQ: 4 IPC[3]: 0.1735
+EPOCH 155
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7646
+LPT1: ROB: 51, LSQ: 32, IQ: 31 IPC[1]: 0.6456
+LPT2: ROB: 68, LSQ: 35, IQ: 35 IPC[2]: 0.7469
+LPT3: ROB: 17, LSQ: 13, IQ: 2 IPC[3]: 0.1735
+EPOCH 156
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7649
+LPT1: ROB: 46, LSQ: 30, IQ: 30 IPC[1]: 0.6466
+LPT2: ROB: 62, LSQ: 32, IQ: 34 IPC[2]: 0.7470
+LPT3: ROB: 12, LSQ: 10, IQ: 2 IPC[3]: 0.1735
+EPOCH 157
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7664
+LPT1: ROB: 51, LSQ: 32, IQ: 31 IPC[1]: 0.6464
+LPT2: ROB: 67, LSQ: 35, IQ: 35 IPC[2]: 0.7474
+LPT3: ROB: 18, LSQ: 13, IQ: 4 IPC[3]: 0.1734
+EPOCH 158
+
+HPT : ROB: 72, LSQ: 40, IQ: 22 IPC[0]: 1.7671
+LPT1: ROB: 56, LSQ: 34, IQ: 32 IPC[1]: 0.6454
+LPT2: ROB: 73, LSQ: 38, IQ: 36 IPC[2]: 0.7476
+LPT3: ROB: 23, LSQ: 16, IQ: 6 IPC[3]: 0.1734
+EPOCH 159
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7678
+LPT1: ROB: 51, LSQ: 32, IQ: 31 IPC[1]: 0.6463
+LPT2: ROB: 68, LSQ: 35, IQ: 35 IPC[2]: 0.7480
+LPT3: ROB: 17, LSQ: 13, IQ: 4 IPC[3]: 0.1734
+EPOCH 160
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7683
+LPT1: ROB: 46, LSQ: 30, IQ: 30 IPC[1]: 0.6473
+LPT2: ROB: 63, LSQ: 32, IQ: 34 IPC[2]: 0.7483
+LPT3: ROB: 11, LSQ: 10, IQ: 2 IPC[3]: 0.1734
+EPOCH 161
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7694
+LPT1: ROB: 54, LSQ: 34, IQ: 32 IPC[1]: 0.6488
+LPT2: ROB: 65, LSQ: 33, IQ: 34 IPC[2]: 0.7450
+LPT3: ROB: 17, LSQ: 13, IQ: 4 IPC[3]: 0.1733
+EPOCH 162
+
+HPT : ROB: 72, LSQ: 40, IQ: 22 IPC[0]: 1.7675
+LPT1: ROB: 62, LSQ: 38, IQ: 34 IPC[1]: 0.6487
+LPT2: ROB: 66, LSQ: 33, IQ: 34 IPC[2]: 0.7407
+LPT3: ROB: 24, LSQ: 17, IQ: 6 IPC[3]: 0.1734
+EPOCH 163
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7679
+LPT1: ROB: 58, LSQ: 36, IQ: 33 IPC[1]: 0.6507
+LPT2: ROB: 59, LSQ: 30, IQ: 32 IPC[2]: 0.7378
+LPT3: ROB: 19, LSQ: 14, IQ: 5 IPC[3]: 0.1734
+EPOCH 164
+
+HPT : ROB: 72, LSQ: 40, IQ: 22 IPC[0]: 1.7688
+LPT1: ROB: 66, LSQ: 40, IQ: 35 IPC[1]: 0.6526
+LPT2: ROB: 61, LSQ: 31, IQ: 33 IPC[2]: 0.7349
+LPT3: ROB: 25, LSQ: 17, IQ: 6 IPC[3]: 0.1735
+EPOCH 165
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7685
+LPT1: ROB: 62, LSQ: 38, IQ: 34 IPC[1]: 0.6534
+LPT2: ROB: 55, LSQ: 28, IQ: 31 IPC[2]: 0.7327
+LPT3: ROB: 19, LSQ: 14, IQ: 5 IPC[3]: 0.1736
+EPOCH 166
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7682
+LPT1: ROB: 56, LSQ: 35, IQ: 33 IPC[1]: 0.6530
+LPT2: ROB: 50, LSQ: 26, IQ: 30 IPC[2]: 0.7328
+LPT3: ROB: 14, LSQ: 11, IQ: 3 IPC[3]: 0.1736
+EPOCH 167
+
+HPT : ROB: 120, LSQ: 64, IQ: 34 IPC[0]: 1.7684
+LPT1: ROB: 50, LSQ: 32, IQ: 32 IPC[1]: 0.6535
+LPT2: ROB: 45, LSQ: 24, IQ: 29 IPC[2]: 0.7339
+LPT3: ROB: 9, LSQ: 8, IQ: 1 IPC[3]: 0.1736
+EPOCH 168
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7686
+LPT1: ROB: 55, LSQ: 34, IQ: 33 IPC[1]: 0.6545
+LPT2: ROB: 51, LSQ: 27, IQ: 30 IPC[2]: 0.7342
+LPT3: ROB: 14, LSQ: 11, IQ: 3 IPC[3]: 0.1734
+EPOCH 169
+
+HPT : ROB: 120, LSQ: 64, IQ: 34 IPC[0]: 1.7685
+LPT1: ROB: 50, LSQ: 31, IQ: 32 IPC[1]: 0.6556
+LPT2: ROB: 46, LSQ: 24, IQ: 29 IPC[2]: 0.7344
+LPT3: ROB: 8, LSQ: 9, IQ: 1 IPC[3]: 0.1733
+EPOCH 170
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7689
+LPT1: ROB: 55, LSQ: 33, IQ: 33 IPC[1]: 0.6564
+LPT2: ROB: 52, LSQ: 27, IQ: 30 IPC[2]: 0.7351
+LPT3: ROB: 13, LSQ: 12, IQ: 3 IPC[3]: 0.1730
+EPOCH 171
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7690
+LPT1: ROB: 59, LSQ: 35, IQ: 34 IPC[1]: 0.6564
+LPT2: ROB: 59, LSQ: 30, IQ: 32 IPC[2]: 0.7359
+LPT3: ROB: 18, LSQ: 15, IQ: 4 IPC[3]: 0.1730
+EPOCH 172
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7691
+LPT1: ROB: 54, LSQ: 32, IQ: 33 IPC[1]: 0.6574
+LPT2: ROB: 54, LSQ: 28, IQ: 31 IPC[2]: 0.7366
+LPT3: ROB: 12, LSQ: 12, IQ: 2 IPC[3]: 0.1730
+EPOCH 173
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7692
+LPT1: ROB: 62, LSQ: 36, IQ: 35 IPC[1]: 0.6588
+LPT2: ROB: 56, LSQ: 29, IQ: 32 IPC[2]: 0.7338
+LPT3: ROB: 18, LSQ: 15, IQ: 3 IPC[3]: 0.1729
+EPOCH 174
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7704
+LPT1: ROB: 58, LSQ: 34, IQ: 34 IPC[1]: 0.6612
+LPT2: ROB: 49, LSQ: 26, IQ: 30 IPC[2]: 0.7314
+LPT3: ROB: 13, LSQ: 12, IQ: 2 IPC[3]: 0.1729
+EPOCH 175
+
+HPT : ROB: 88, LSQ: 48, IQ: 26 IPC[0]: 1.7708
+LPT1: ROB: 62, LSQ: 36, IQ: 35 IPC[1]: 0.6608
+LPT2: ROB: 56, LSQ: 29, IQ: 32 IPC[2]: 0.7317
+LPT3: ROB: 18, LSQ: 15, IQ: 3 IPC[3]: 0.1729
+EPOCH 176
+
+HPT : ROB: 104, LSQ: 56, IQ: 30 IPC[0]: 1.7708
+LPT1: ROB: 57, LSQ: 33, IQ: 34 IPC[1]: 0.6617
+LPT2: ROB: 51, LSQ: 27, IQ: 31 IPC[2]: 0.7326
+LPT3: ROB: 12, LSQ: 12, IQ: 1 IPC[3]: 0.1729
+EPOCH 177
+
+HPT : ROB: 120, LSQ: 64, IQ: 32 IPC[0]: 1.7707
+LPT1: ROB: 52, LSQ: 30, IQ: 33 IPC[1]: 0.6626
+LPT2: ROB: 46, LSQ: 25, IQ: 30 IPC[2]: 0.7335
+LPT3: ROB: 6, LSQ: 9, IQ: 1 IPC[3]: 0.1727
+EPOCH 178
+
+HPT : ROB: 104, LSQ: 56, IQ: 28 IPC[0]: 1.7711
+LPT1: ROB: 58, LSQ: 33, IQ: 35 IPC[1]: 0.6639
+LPT2: ROB: 49, LSQ: 27, IQ: 31 IPC[2]: 0.7316
+LPT3: ROB: 13, LSQ: 12, IQ: 2 IPC[3]: 0.1725
+EPOCH 179
+
+HPT : ROB: 88, LSQ: 48, IQ: 24 IPC[0]: 1.7702
+LPT1: ROB: 66, LSQ: 37, IQ: 37 IPC[1]: 0.6645
+LPT2: ROB: 50, LSQ: 27, IQ: 31 IPC[2]: 0.7279
+LPT3: ROB: 20, LSQ: 16, IQ: 4 IPC[3]: 0.1725
+EPOCH 180
+
+HPT : ROB: 104, LSQ: 56, IQ: 28 IPC[0]: 1.7703
+LPT1: ROB: 61, LSQ: 34, IQ: 36 IPC[1]: 0.6651
+LPT2: ROB: 45, LSQ: 24, IQ: 30 IPC[2]: 0.7270
+LPT3: ROB: 14, LSQ: 14, IQ: 2 IPC[3]: 0.1725
+EPOCH 181
+
+HPT : ROB: 88, LSQ: 48, IQ: 24 IPC[0]: 1.7711
+LPT1: ROB: 66, LSQ: 37, IQ: 37 IPC[1]: 0.6654
+LPT2: ROB: 50, LSQ: 27, IQ: 31 IPC[2]: 0.7260
+LPT3: ROB: 20, LSQ: 16, IQ: 4 IPC[3]: 0.1724
+EPOCH 182
+
+HPT : ROB: 104, LSQ: 56, IQ: 28 IPC[0]: 1.7715
+LPT1: ROB: 61, LSQ: 34, IQ: 36 IPC[1]: 0.6663
+LPT2: ROB: 45, LSQ: 24, IQ: 30 IPC[2]: 0.7254
+LPT3: ROB: 14, LSQ: 14, IQ: 2 IPC[3]: 0.1725
+EPOCH 183
+
+HPT : ROB: 88, LSQ: 48, IQ: 24 IPC[0]: 1.7722
+LPT1: ROB: 66, LSQ: 37, IQ: 37 IPC[1]: 0.6666
+LPT2: ROB: 51, LSQ: 27, IQ: 31 IPC[2]: 0.7250
+LPT3: ROB: 19, LSQ: 16, IQ: 4 IPC[3]: 0.1724
+EPOCH 184
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7732
+LPT1: ROB: 70, LSQ: 39, IQ: 37 IPC[1]: 0.6658
+LPT2: ROB: 58, LSQ: 30, IQ: 31 IPC[2]: 0.7247
+LPT3: ROB: 24, LSQ: 19, IQ: 4 IPC[3]: 0.1725
+EPOCH 185
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7733
+LPT1: ROB: 65, LSQ: 36, IQ: 36 IPC[1]: 0.6666
+LPT2: ROB: 53, LSQ: 27, IQ: 30 IPC[2]: 0.7243
+LPT3: ROB: 18, LSQ: 17, IQ: 2 IPC[3]: 0.1725
+EPOCH 186
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7740
+LPT1: ROB: 71, LSQ: 39, IQ: 37 IPC[1]: 0.6673
+LPT2: ROB: 59, LSQ: 30, IQ: 31 IPC[2]: 0.7239
+LPT3: ROB: 22, LSQ: 19, IQ: 4 IPC[3]: 0.1725
+EPOCH 187
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7746
+LPT1: ROB: 66, LSQ: 36, IQ: 36 IPC[1]: 0.6681
+LPT2: ROB: 54, LSQ: 27, IQ: 30 IPC[2]: 0.7235
+LPT3: ROB: 16, LSQ: 17, IQ: 2 IPC[3]: 0.1726
+EPOCH 188
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7755
+LPT1: ROB: 71, LSQ: 38, IQ: 37 IPC[1]: 0.6679
+LPT2: ROB: 60, LSQ: 30, IQ: 32 IPC[2]: 0.7231
+LPT3: ROB: 21, LSQ: 20, IQ: 3 IPC[3]: 0.1726
+EPOCH 189
+
+HPT : ROB: 88, LSQ: 48, IQ: 28 IPC[0]: 1.7757
+LPT1: ROB: 66, LSQ: 35, IQ: 36 IPC[1]: 0.6684
+LPT2: ROB: 55, LSQ: 27, IQ: 31 IPC[2]: 0.7225
+LPT3: ROB: 15, LSQ: 18, IQ: 1 IPC[3]: 0.1726
+EPOCH 190
+
+HPT : ROB: 72, LSQ: 40, IQ: 24 IPC[0]: 1.7762
+LPT1: ROB: 72, LSQ: 38, IQ: 37 IPC[1]: 0.6690
+LPT2: ROB: 60, LSQ: 30, IQ: 32 IPC[2]: 0.7219
+LPT3: ROB: 20, LSQ: 20, IQ: 3 IPC[3]: 0.1725
+EPOCH 191
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7761
+LPT1: ROB: 77, LSQ: 41, IQ: 37 IPC[1]: 0.6689
+LPT2: ROB: 66, LSQ: 33, IQ: 32 IPC[2]: 0.7210
+LPT3: ROB: 25, LSQ: 22, IQ: 3 IPC[3]: 0.1726
+EPOCH 192
+
+HPT : ROB: 56, LSQ: 32, IQ: 24 IPC[0]: 1.7781
+LPT1: ROB: 77, LSQ: 41, IQ: 37 IPC[1]: 0.6666
+LPT2: ROB: 66, LSQ: 33, IQ: 32 IPC[2]: 0.7215
+LPT3: ROB: 25, LSQ: 22, IQ: 3 IPC[3]: 0.1726
+EPOCH 193
+
+HPT : ROB: 72, LSQ: 40, IQ: 28 IPC[0]: 1.7788
+LPT1: ROB: 71, LSQ: 38, IQ: 36 IPC[1]: 0.6658
+LPT2: ROB: 62, LSQ: 31, IQ: 31 IPC[2]: 0.7219
+LPT3: ROB: 19, LSQ: 19, IQ: 1 IPC[3]: 0.1727
+EPOCH 194
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7802
+LPT1: ROB: 65, LSQ: 35, IQ: 35 IPC[1]: 0.6655
+LPT2: ROB: 57, LSQ: 29, IQ: 30 IPC[2]: 0.7220
+LPT3: ROB: 14, LSQ: 16, IQ: 1 IPC[3]: 0.1726
+EPOCH 195
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7818
+LPT1: ROB: 67, LSQ: 36, IQ: 35 IPC[1]: 0.6629
+LPT2: ROB: 65, LSQ: 33, IQ: 32 IPC[2]: 0.7217
+LPT3: ROB: 20, LSQ: 19, IQ: 3 IPC[3]: 0.1725
+EPOCH 196
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7838
+LPT1: ROB: 71, LSQ: 38, IQ: 36 IPC[1]: 0.6615
+LPT2: ROB: 71, LSQ: 36, IQ: 34 IPC[2]: 0.7212
+LPT3: ROB: 26, LSQ: 22, IQ: 4 IPC[3]: 0.1726
+EPOCH 197
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7863
+LPT1: ROB: 67, LSQ: 36, IQ: 35 IPC[1]: 0.6621
+LPT2: ROB: 64, LSQ: 33, IQ: 32 IPC[2]: 0.7187
+LPT3: ROB: 21, LSQ: 19, IQ: 3 IPC[3]: 0.1727
+EPOCH 198
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7846
+LPT1: ROB: 72, LSQ: 39, IQ: 36 IPC[1]: 0.6605
+LPT2: ROB: 66, LSQ: 34, IQ: 32 IPC[2]: 0.7157
+LPT3: ROB: 30, LSQ: 23, IQ: 6 IPC[3]: 0.1726
+EPOCH 199
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7846
+LPT1: ROB: 72, LSQ: 39, IQ: 36 IPC[1]: 0.6584
+LPT2: ROB: 66, LSQ: 34, IQ: 32 IPC[2]: 0.7149
+LPT3: ROB: 30, LSQ: 23, IQ: 6 IPC[3]: 0.1728
+EPOCH 200
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7855
+LPT1: ROB: 67, LSQ: 36, IQ: 35 IPC[1]: 0.6584
+LPT2: ROB: 61, LSQ: 32, IQ: 31 IPC[2]: 0.7148
+LPT3: ROB: 24, LSQ: 20, IQ: 4 IPC[3]: 0.1729
+EPOCH 201
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7856
+LPT1: ROB: 62, LSQ: 34, IQ: 34 IPC[1]: 0.6589
+LPT2: ROB: 56, LSQ: 29, IQ: 30 IPC[2]: 0.7144
+LPT3: ROB: 18, LSQ: 17, IQ: 2 IPC[3]: 0.1729
+EPOCH 202
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7860
+LPT1: ROB: 67, LSQ: 36, IQ: 35 IPC[1]: 0.6583
+LPT2: ROB: 62, LSQ: 32, IQ: 32 IPC[2]: 0.7141
+LPT3: ROB: 23, LSQ: 20, IQ: 3 IPC[3]: 0.1729
+EPOCH 203
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7862
+LPT1: ROB: 62, LSQ: 34, IQ: 34 IPC[1]: 0.6591
+LPT2: ROB: 57, LSQ: 29, IQ: 31 IPC[2]: 0.7142
+LPT3: ROB: 17, LSQ: 17, IQ: 1 IPC[3]: 0.1730
+EPOCH 204
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7870
+LPT1: ROB: 67, LSQ: 37, IQ: 35 IPC[1]: 0.6588
+LPT2: ROB: 62, LSQ: 32, IQ: 32 IPC[2]: 0.7134
+LPT3: ROB: 23, LSQ: 19, IQ: 3 IPC[3]: 0.1729
+EPOCH 205
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7872
+LPT1: ROB: 74, LSQ: 40, IQ: 37 IPC[1]: 0.6592
+LPT2: ROB: 66, LSQ: 34, IQ: 33 IPC[2]: 0.7121
+LPT3: ROB: 28, LSQ: 22, IQ: 4 IPC[3]: 0.1729
+EPOCH 206
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7882
+LPT1: ROB: 68, LSQ: 37, IQ: 35 IPC[1]: 0.6577
+LPT2: ROB: 62, LSQ: 32, IQ: 32 IPC[2]: 0.7121
+LPT3: ROB: 22, LSQ: 19, IQ: 3 IPC[3]: 0.1730
+EPOCH 207
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7888
+LPT1: ROB: 64, LSQ: 35, IQ: 34 IPC[1]: 0.6593
+LPT2: ROB: 56, LSQ: 29, IQ: 31 IPC[2]: 0.7116
+LPT3: ROB: 16, LSQ: 16, IQ: 1 IPC[3]: 0.1730
+EPOCH 208
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7887
+LPT1: ROB: 71, LSQ: 39, IQ: 36 IPC[1]: 0.6591
+LPT2: ROB: 58, LSQ: 30, IQ: 32 IPC[2]: 0.7089
+LPT3: ROB: 23, LSQ: 19, IQ: 2 IPC[3]: 0.1729
+EPOCH 209
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7871
+LPT1: ROB: 73, LSQ: 40, IQ: 36 IPC[1]: 0.6565
+LPT2: ROB: 65, LSQ: 33, IQ: 34 IPC[2]: 0.7076
+LPT3: ROB: 30, LSQ: 23, IQ: 4 IPC[3]: 0.1729
+EPOCH 210
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7854
+LPT1: ROB: 73, LSQ: 40, IQ: 36 IPC[1]: 0.6544
+LPT2: ROB: 65, LSQ: 33, IQ: 34 IPC[2]: 0.7054
+LPT3: ROB: 30, LSQ: 23, IQ: 4 IPC[3]: 0.1730
+EPOCH 211
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7866
+LPT1: ROB: 68, LSQ: 38, IQ: 35 IPC[1]: 0.6549
+LPT2: ROB: 59, LSQ: 30, IQ: 33 IPC[2]: 0.7044
+LPT3: ROB: 25, LSQ: 20, IQ: 2 IPC[3]: 0.1731
+warning: invalid/unimplemented syscall 224, PC=0x1203dc944, RA=0x12010ef74, winging it
+EPOCH 212
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7853
+LPT1: ROB: 75, LSQ: 42, IQ: 37 IPC[1]: 0.6548
+LPT2: ROB: 62, LSQ: 32, IQ: 34 IPC[2]: 0.7022
+LPT3: ROB: 31, LSQ: 22, IQ: 3 IPC[3]: 0.1731
+EPOCH 213
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7854
+LPT1: ROB: 72, LSQ: 41, IQ: 36 IPC[1]: 0.6581
+LPT2: ROB: 54, LSQ: 28, IQ: 32 IPC[2]: 0.6994
+LPT3: ROB: 26, LSQ: 19, IQ: 2 IPC[3]: 0.1731
+warning: table: unsupported table id 4762 requested, ignored
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064c4, winging it
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064e4, winging it
+EPOCH 214
+
+HPT : ROB: 88, LSQ: 48, IQ: 30 IPC[0]: 1.7852
+LPT1: ROB: 68, LSQ: 39, IQ: 35 IPC[1]: 0.6603
+LPT2: ROB: 48, LSQ: 25, IQ: 30 IPC[2]: 0.6977
+LPT3: ROB: 20, LSQ: 16, IQ: 1 IPC[3]: 0.1732
+EPOCH 215
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7858
+LPT1: ROB: 78, LSQ: 44, IQ: 38 IPC[1]: 0.6641
+LPT2: ROB: 49, LSQ: 26, IQ: 30 IPC[2]: 0.6951
+LPT3: ROB: 25, LSQ: 18, IQ: 2 IPC[3]: 0.1731
+NONE/include: Successful
+warning: invalid/unimplemented syscall 224, PC=0x1203dc944, RA=0x12010ef74, winging it
+warning: table: unsupported table id 4762 requested, ignored
+EPOCH 216
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7855
+LPT1: ROB: 87, LSQ: 49, IQ: 40 IPC[1]: 0.6662
+LPT2: ROB: 51, LSQ: 27, IQ: 30 IPC[2]: 0.6926
+LPT3: ROB: 30, LSQ: 20, IQ: 4 IPC[3]: 0.1731
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064c4, winging it
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064e4, winging it
+/usr/include: Successful
+warning: invalid/unimplemented syscall 226, PC=0x1203dc984, RA=0x12010cc28, winging it
+EPOCH 217
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7843
+LPT1: ROB: 82, LSQ: 46, IQ: 39 IPC[1]: 0.6672
+LPT2: ROB: 46, LSQ: 24, IQ: 29 IPC[2]: 0.6919
+LPT3: ROB: 24, LSQ: 18, IQ: 2 IPC[3]: 0.1732
+warning: table: unsupported table id 4762 requested, ignored
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064c4, winging it
+warning: invalid/unimplemented syscall 79, PC=0x120410654, RA=0x1204064e4, winging it
+gcc.base.alpha: EPOCH 218
+
+HPT : ROB: 56, LSQ: 32, IQ: 22 IPC[0]: 1.7838
+LPT1: ROB: 87, LSQ: 48, IQ: 40 IPC[1]: 0.6673
+LPT2: ROB: 53, LSQ: 27, IQ: 31 IPC[2]: 0.6913
+LPT3: ROB: 28, LSQ: 21, IQ: 3 IPC[3]: 0.1732
+./166.i: Successful
+EPOCH 219
+
+HPT : ROB: 72, LSQ: 40, IQ: 26 IPC[0]: 1.7837
+LPT1: ROB: 83, LSQ: 46, IQ: 39 IPC[1]: 0.6693
+LPT2: ROB: 46, LSQ: 23, IQ: 29 IPC[2]: 0.6888
+LPT3: ROB: 23, LSQ: 19, IQ: 2 IPC[3]: 0.1733
+warning: partially supported sigprocmask() call...
+
+sim: ** simulation statistics **
+sim_num_insn               18212157 # total number of instructions committed
+sim_num_insn 0              9800782 # total number of instructions committed for this thread
+sim_num_insn 1              3686969 # total number of instructions committed for this thread
+sim_num_insn 2              3772314 # total number of instructions committed for this thread
+sim_num_insn 3               952012 # total number of instructions committed for this thread
+sim_num_refs                6639828 # total number of loads and stores committed
+sim_num_loads               3325634 # total number of loads committed
+sim_num_stores         3314194.0000 # total number of stores committed
+sim_num_branches            1251140 # total number of branches committed
+sim_elapsed_time                 92 # total simulation time in seconds
+sim_inst_rate           197958.2283 # simulation speed (in insts/sec)
+sim_total_insn             22525244 # total number of instructions executed
+sim_total_refs              8213586 # total number of loads and stores executed
+sim_total_loads             4035448 # total number of loads executed
+sim_total_stores       4178138.0000 # total number of stores executed
+sim_total_branches          1657149 # total number of branches executed
+sim_cycle                   5492400 # total simulation time in cycles
+sim_IPC                      3.3159 # instructions per cycle
+sim_CPI                      0.3016 # cycles per instruction
+sim_exec_BW                  4.1012 # total instructions (mis-spec + committed) per cycle
+sim_IPB                     14.5565 # instruction per branch
+sim_slip                  734599020 # total number of slip cycles
+avg_sim_slip                40.3356 # the average slip between issue and retirement
+Thread_0_bpred_bimod.lookups       392376 # total number of bpred lookups
+Thread_0_bpred_bimod.updates       326549 # total number of updates
+Thread_0_bpred_bimod.addr_hits       263246 # total number of address-predicted hits
+Thread_0_bpred_bimod.dir_hits       263246 # total number of direction-predicted hits (includes addr-hits)
+Thread_0_bpred_bimod.misses        63303 # total number of misses
+Thread_0_bpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_0_bpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_0_bpred_bimod.jr_non_ras_hits.PP          811 # total number of address-predicted hits for non-RAS JR's
+Thread_0_bpred_bimod.jr_non_ras_seen.PP         1071 # total number of non-RAS JR's seen
+Thread_0_bpred_bimod.bpred_addr_rate    0.8061 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_0_bpred_bimod.bpred_dir_rate    0.8061 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_0_bpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_0_bpred_bimod.bpred_jr_non_ras_rate.PP    0.7572 # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_0_bpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_0_bpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_0_bpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_0_bpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_0_bpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_1_bpred_bimod.lookups       538721 # total number of bpred lookups
+Thread_1_bpred_bimod.updates       363013 # total number of updates
+Thread_1_bpred_bimod.addr_hits       319319 # total number of address-predicted hits
+Thread_1_bpred_bimod.dir_hits       323236 # total number of direction-predicted hits (includes addr-hits)
+Thread_1_bpred_bimod.misses        39777 # total number of misses
+Thread_1_bpred_bimod.jr_hits        22761 # total number of address-predicted hits for JR's
+Thread_1_bpred_bimod.jr_seen        26476 # total number of JR's seen
+Thread_1_bpred_bimod.jr_non_ras_hits.PP        13713 # total number of address-predicted hits for non-RAS JR's
+Thread_1_bpred_bimod.jr_non_ras_seen.PP        13923 # total number of non-RAS JR's seen
+Thread_1_bpred_bimod.bpred_addr_rate    0.8796 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_1_bpred_bimod.bpred_dir_rate    0.8904 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_1_bpred_bimod.bpred_jr_rate    0.8597 # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_1_bpred_bimod.bpred_jr_non_ras_rate.PP    0.9849 # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_1_bpred_bimod.retstack_pushes        33123 # total number of address pushed onto ret-addr stack
+Thread_1_bpred_bimod.retstack_pops        39018 # total number of address popped off of ret-addr stack
+Thread_1_bpred_bimod.used_ras.PP        25912 # total number of RAS predictions used
+Thread_1_bpred_bimod.ras_hits.PP        22241 # total number of RAS hits
+Thread_1_bpred_bimod.ras_rate.PP    0.8583 # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_2_bpred_bimod.lookups       883336 # total number of bpred lookups
+Thread_2_bpred_bimod.updates       540879 # total number of updates
+Thread_2_bpred_bimod.addr_hits       481023 # total number of address-predicted hits
+Thread_2_bpred_bimod.dir_hits       503835 # total number of direction-predicted hits (includes addr-hits)
+Thread_2_bpred_bimod.misses        37044 # total number of misses
+Thread_2_bpred_bimod.jr_hits        50890 # total number of address-predicted hits for JR's
+Thread_2_bpred_bimod.jr_seen        71506 # total number of JR's seen
+Thread_2_bpred_bimod.jr_non_ras_hits.PP        18446 # total number of address-predicted hits for non-RAS JR's
+Thread_2_bpred_bimod.jr_non_ras_seen.PP        30624 # total number of non-RAS JR's seen
+Thread_2_bpred_bimod.bpred_addr_rate    0.8893 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_2_bpred_bimod.bpred_dir_rate    0.9315 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_2_bpred_bimod.bpred_jr_rate    0.7117 # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_2_bpred_bimod.bpred_jr_non_ras_rate.PP    0.6023 # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_2_bpred_bimod.retstack_pushes        75974 # total number of address pushed onto ret-addr stack
+Thread_2_bpred_bimod.retstack_pops        94866 # total number of address popped off of ret-addr stack
+Thread_2_bpred_bimod.used_ras.PP        55823 # total number of RAS predictions used
+Thread_2_bpred_bimod.ras_hits.PP        41286 # total number of RAS hits
+Thread_2_bpred_bimod.ras_rate.PP    0.7396 # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_3_bpred_bimod.lookups        20697 # total number of bpred lookups
+Thread_3_bpred_bimod.updates        20696 # total number of updates
+Thread_3_bpred_bimod.addr_hits        20696 # total number of address-predicted hits
+Thread_3_bpred_bimod.dir_hits        20696 # total number of direction-predicted hits (includes addr-hits)
+Thread_3_bpred_bimod.misses            0 # total number of misses
+Thread_3_bpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_3_bpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_3_bpred_bimod.jr_non_ras_hits.PP          430 # total number of address-predicted hits for non-RAS JR's
+Thread_3_bpred_bimod.jr_non_ras_seen.PP          482 # total number of non-RAS JR's seen
+Thread_3_bpred_bimod.bpred_addr_rate    1.0000 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_3_bpred_bimod.bpred_dir_rate    1.0000 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_3_bpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_3_bpred_bimod.bpred_jr_non_ras_rate.PP    0.8921 # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_3_bpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_3_bpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_3_bpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_3_bpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_3_bpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_0_cpred_bimod.lookups       952242 # total number of bpred lookups
+Thread_0_cpred_bimod.updates       952242 # total number of updates
+Thread_0_cpred_bimod.addr_hits       115563 # total number of address-predicted hits
+Thread_0_cpred_bimod.dir_hits       115563 # total number of direction-predicted hits (includes addr-hits)
+Thread_0_cpred_bimod.misses       836679 # total number of misses
+Thread_0_cpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_0_cpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_0_cpred_bimod.jr_non_ras_hits.PP            0 # total number of address-predicted hits for non-RAS JR's
+Thread_0_cpred_bimod.jr_non_ras_seen.PP            0 # total number of non-RAS JR's seen
+Thread_0_cpred_bimod.bpred_addr_rate    0.1214 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_0_cpred_bimod.bpred_dir_rate    0.1214 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_0_cpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_0_cpred_bimod.bpred_jr_non_ras_rate.PP <error: divide by zero> # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_0_cpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_0_cpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_0_cpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_0_cpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_0_cpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_1_cpred_bimod.lookups       958213 # total number of bpred lookups
+Thread_1_cpred_bimod.updates       958213 # total number of updates
+Thread_1_cpred_bimod.addr_hits       330136 # total number of address-predicted hits
+Thread_1_cpred_bimod.dir_hits       330136 # total number of direction-predicted hits (includes addr-hits)
+Thread_1_cpred_bimod.misses       628077 # total number of misses
+Thread_1_cpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_1_cpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_1_cpred_bimod.jr_non_ras_hits.PP            0 # total number of address-predicted hits for non-RAS JR's
+Thread_1_cpred_bimod.jr_non_ras_seen.PP            0 # total number of non-RAS JR's seen
+Thread_1_cpred_bimod.bpred_addr_rate    0.3445 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_1_cpred_bimod.bpred_dir_rate    0.3445 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_1_cpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_1_cpred_bimod.bpred_jr_non_ras_rate.PP <error: divide by zero> # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_1_cpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_1_cpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_1_cpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_1_cpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_1_cpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_2_cpred_bimod.lookups       759926 # total number of bpred lookups
+Thread_2_cpred_bimod.updates       759926 # total number of updates
+Thread_2_cpred_bimod.addr_hits       248901 # total number of address-predicted hits
+Thread_2_cpred_bimod.dir_hits       248901 # total number of direction-predicted hits (includes addr-hits)
+Thread_2_cpred_bimod.misses       511025 # total number of misses
+Thread_2_cpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_2_cpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_2_cpred_bimod.jr_non_ras_hits.PP            0 # total number of address-predicted hits for non-RAS JR's
+Thread_2_cpred_bimod.jr_non_ras_seen.PP            0 # total number of non-RAS JR's seen
+Thread_2_cpred_bimod.bpred_addr_rate    0.3275 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_2_cpred_bimod.bpred_dir_rate    0.3275 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_2_cpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_2_cpred_bimod.bpred_jr_non_ras_rate.PP <error: divide by zero> # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_2_cpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_2_cpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_2_cpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_2_cpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_2_cpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+Thread_3_cpred_bimod.lookups       166212 # total number of bpred lookups
+Thread_3_cpred_bimod.updates       166212 # total number of updates
+Thread_3_cpred_bimod.addr_hits       161292 # total number of address-predicted hits
+Thread_3_cpred_bimod.dir_hits       161292 # total number of direction-predicted hits (includes addr-hits)
+Thread_3_cpred_bimod.misses         4920 # total number of misses
+Thread_3_cpred_bimod.jr_hits            0 # total number of address-predicted hits for JR's
+Thread_3_cpred_bimod.jr_seen            0 # total number of JR's seen
+Thread_3_cpred_bimod.jr_non_ras_hits.PP            0 # total number of address-predicted hits for non-RAS JR's
+Thread_3_cpred_bimod.jr_non_ras_seen.PP            0 # total number of non-RAS JR's seen
+Thread_3_cpred_bimod.bpred_addr_rate    0.9704 # branch address-prediction rate (i.e., addr-hits/updates)
+Thread_3_cpred_bimod.bpred_dir_rate    0.9704 # branch direction-prediction rate (i.e., all-hits/updates)
+Thread_3_cpred_bimod.bpred_jr_rate <error: divide by zero> # JR address-prediction rate (i.e., JR addr-hits/JRs seen)
+Thread_3_cpred_bimod.bpred_jr_non_ras_rate.PP <error: divide by zero> # non-RAS JR addr-pred rate (ie, non-RAS JR hits/JRs seen)
+Thread_3_cpred_bimod.retstack_pushes            0 # total number of address pushed onto ret-addr stack
+Thread_3_cpred_bimod.retstack_pops            0 # total number of address popped off of ret-addr stack
+Thread_3_cpred_bimod.used_ras.PP            0 # total number of RAS predictions used
+Thread_3_cpred_bimod.ras_hits.PP            0 # total number of RAS hits
+Thread_3_cpred_bimod.ras_rate.PP <error: divide by zero> # RAS prediction rate (i.e., RAS hits/used RAS)
+il1.accesses               24326029 # total number of accesses
+il1.hits                   24237227 # total number of hits
+il1.misses                    88802 # total number of misses
+il1.replacements              88802 # total number of replacements
+il1.writebacks                    0 # total number of writebacks
+il1.invalidations                 0 # total number of invalidations
+il1.miss_rate                0.0037 # miss rate (i.e., misses/ref)
+il1.repl_rate                0.0037 # replacement rate (i.e., repls/ref)
+il1.wb_rate                  0.0000 # writeback rate (i.e., wrbks/ref)
+il1.inv_rate                 0.0000 # invalidation rate (i.e., invs/ref)
+dl1.accesses                6797001 # total number of accesses
+dl1.hits                    6042997 # total number of hits
+dl1.misses                   754004 # total number of misses
+dl1.replacements             754004 # total number of replacements
+dl1.writebacks               649902 # total number of writebacks
+dl1.invalidations                 0 # total number of invalidations
+dl1.miss_rate                0.1109 # miss rate (i.e., misses/ref)
+dl1.repl_rate                0.1109 # replacement rate (i.e., repls/ref)
+dl1.wb_rate                  0.0956 # writeback rate (i.e., wrbks/ref)
+dl1.inv_rate                 0.0000 # invalidation rate (i.e., invs/ref)
+ul2.accesses                1492708 # total number of accesses
+ul2.hits                    1001328 # total number of hits
+ul2.misses                   491380 # total number of misses
+ul2.replacements             491380 # total number of replacements
+ul2.writebacks               391276 # total number of writebacks
+ul2.invalidations                 0 # total number of invalidations
+ul2.miss_rate                0.3292 # miss rate (i.e., misses/ref)
+ul2.repl_rate                0.3292 # replacement rate (i.e., repls/ref)
+ul2.wb_rate                  0.2621 # writeback rate (i.e., wrbks/ref)
+ul2.inv_rate                 0.0000 # invalidation rate (i.e., invs/ref)
+itlb.accesses              24326029 # total number of accesses
+itlb.hits                  24322733 # total number of hits
+itlb.misses                    3296 # total number of misses
+itlb.replacements              3296 # total number of replacements
+itlb.writebacks                   0 # total number of writebacks
+itlb.invalidations                0 # total number of invalidations
+itlb.miss_rate               0.0001 # miss rate (i.e., misses/ref)
+itlb.repl_rate               0.0001 # replacement rate (i.e., repls/ref)
+itlb.wb_rate                 0.0000 # writeback rate (i.e., wrbks/ref)
+itlb.inv_rate                0.0000 # invalidation rate (i.e., invs/ref)
+dtlb.accesses               7048482 # total number of accesses
+dtlb.hits                   6982377 # total number of hits
+dtlb.misses                   66105 # total number of misses
+dtlb.replacements             66105 # total number of replacements
+dtlb.writebacks                   0 # total number of writebacks
+dtlb.invalidations                0 # total number of invalidations
+dtlb.miss_rate               0.0094 # miss rate (i.e., misses/ref)
+dtlb.repl_rate               0.0094 # replacement rate (i.e., repls/ref)
+dtlb.wb_rate                 0.0000 # writeback rate (i.e., wrbks/ref)
+dtlb.inv_rate                0.0000 # invalidation rate (i.e., invs/ref)
+sim_invalid_addrs                 0 # total non-speculative bogus addresses seen (debug var)
+ld_text_base           0x0120000000 # program text (code) segment base
+mem->ld_text_size            294912 # program text (code) size in bytes
+mem->ld_data_base      0x0140000000 # program initialized data segment base
+mem->ld_data_size             93888 # program init'ed `.data' and uninit'ed `.bss' size in bytes
+mem->ld_stack_base     0x011ff9b000 # program stack segment base (highest address in stack)
+mem->ld_stack_size            16384 # program initial stack size
+mem->ld_prog_entry     0x0120000300 # program entry point (initial PC)
+mem->ld_environ_base   0x011ff97000 # program environment base address address
+mem->ld_target_big_endian            0 # target executable endian-ness, non-zero if big endian
+mem_0.page_count             108053 # total number of pages allocated
+mem_0.page_mem              864424k # total size of memory pages allocated
+mem_0.ptab_misses            113987 # total first level page table misses
+mem_0.ptab_accesses       152362518 # total page table accesses
+mem_0.ptab_miss_rate         0.0007 # first level page table miss rate
+ld_text_base           0x0120000000 # program text (code) segment base
+mem->ld_text_size           1384448 # program text (code) size in bytes
+mem->ld_data_base      0x0140000000 # program initialized data segment base
+mem->ld_data_size            451744 # program init'ed `.data' and uninit'ed `.bss' size in bytes
+mem->ld_stack_base     0x011ff9b000 # program stack segment base (highest address in stack)
+mem->ld_stack_size            16384 # program initial stack size
+mem->ld_prog_entry     0x012002e820 # program entry point (initial PC)
+mem->ld_environ_base   0x011ff97000 # program environment base address address
+mem->ld_target_big_endian            0 # target executable endian-ness, non-zero if big endian
+mem_0.page_count               2040 # total number of pages allocated
+mem_0.page_mem              864424k # total size of memory pages allocated
+mem_0.ptab_misses             22118 # total first level page table misses
+mem_0.ptab_accesses       111390241 # total page table accesses
+mem_0.ptab_miss_rate         0.0007 # first level page table miss rate
+ld_text_base           0x0120000000 # program text (code) segment base
+mem->ld_text_size           4268032 # program text (code) size in bytes
+mem->ld_data_base      0x0140000000 # program initialized data segment base
+mem->ld_data_size           1160640 # program init'ed `.data' and uninit'ed `.bss' size in bytes
+mem->ld_stack_base     0x011ff9b000 # program stack segment base (highest address in stack)
+mem->ld_stack_size            16384 # program initial stack size
+mem->ld_prog_entry     0x0120081330 # program entry point (initial PC)
+mem->ld_environ_base   0x011ff97000 # program environment base address address
+mem->ld_target_big_endian            0 # target executable endian-ness, non-zero if big endian
+mem_0.page_count                723 # total number of pages allocated
+mem_0.page_mem              864424k # total size of memory pages allocated
+mem_0.ptab_misses             37184 # total first level page table misses
+mem_0.ptab_accesses        94352061 # total page table accesses
+mem_0.ptab_miss_rate         0.0007 # first level page table miss rate
+ld_text_base           0x0120000000 # program text (code) segment base
+mem->ld_text_size            221184 # program text (code) size in bytes
+mem->ld_data_base      0x0140000000 # program initialized data segment base
+mem->ld_data_size             79792 # program init'ed `.data' and uninit'ed `.bss' size in bytes
+mem->ld_stack_base     0x011ff9b000 # program stack segment base (highest address in stack)
+mem->ld_stack_size            16384 # program initial stack size
+mem->ld_prog_entry     0x0120000300 # program entry point (initial PC)
+mem->ld_environ_base   0x011ff97000 # program environment base address address
+mem->ld_target_big_endian            0 # target executable endian-ness, non-zero if big endian
+mem_0.page_count             107561 # total number of pages allocated
+mem_0.page_mem              864424k # total size of memory pages allocated
+mem_0.ptab_misses            977404 # total first level page table misses
+mem_0.ptab_accesses       202313020 # total page table accesses
+mem_0.ptab_miss_rate         0.0007 # first level page table miss rate
+rename_power           8758585.6275 # total power usage of rename unit
+bpred_power            24842819.4189 # total power usage of bpred unit
+window_power           224643424.3509 # total power usage of instruction window
+lsq_power              43784369.6392 # total power usage of load/store queue
+regfile_power          51600587.6000 # total power usage of arch. regfile
+icache_power           24372820.7128 # total power usage of icache
+dcache_power           50793592.5082 # total power usage of dcache
+dcache2_power          83631391.1186 # total power usage of dcache2
+alu_power              104032511.7739 # total power usage of alu
+falu_power             78437211.2571 # total power usage of falu
+resultbus_power        162088145.6471 # total power usage of resultbus
+clock_power            222676485.5242 # total power usage of clock
+avg_rename_power             1.5947 # avg power usage of rename unit
+avg_bpred_power              4.5231 # avg power usage of bpred unit
+avg_window_power            40.9008 # avg power usage of instruction window
+avg_lsq_power                7.9718 # avg power usage of lsq
+avg_regfile_power            9.3949 # avg power usage of arch. regfile
+avg_icache_power             4.4376 # avg power usage of icache
+avg_dcache_power             9.2480 # avg power usage of dcache
+avg_dcache2_power           15.2267 # avg power usage of dcache2
+avg_alu_power               18.9412 # avg power usage of alu
+avg_falu_power              14.2810 # avg power usage of falu
+avg_resultbus_power         29.5114 # avg power usage of resultbus
+avg_clock_power             40.5427 # avg power usage of clock
+fetch_stage_power      49215640.1317 # total power usage of fetch stage
+dispatch_stage_power   8758585.6275 # total power usage of dispatch stage
+issue_stage_power      668973435.0379 # total power usage of issue stage
+avg_fetch_power              8.9607 # average power of fetch unit per cycle
+avg_dispatch_power           1.5947 # average power of dispatch unit per cycle
+avg_issue_power            121.7998 # average power of issue unit per cycle
+total_power            1001224733.9213 # total power per cycle
+avg_total_power_cycle      182.2928 # average total power per cycle
+avg_total_power_cycle_nofp_nod2     152.7850 # average total power per cycle
+avg_total_power_insn        44.4490 # average total power per insn
+avg_total_power_insn_nofp_nod2      37.2540 # average total power per insn
+rename_power_cc1       6157752.6162 # total power usage of rename unit_cc1
+bpred_power_cc1        4697524.5805 # total power usage of bpred unit_cc1
+window_power_cc1       190559474.9969 # total power usage of instruction window_cc1
+lsq_power_cc1          18051640.1050 # total power usage of lsq_cc1
+regfile_power_cc1      32949001.5125 # total power usage of arch. regfile_cc1
+icache_power_cc1       17141769.0397 # total power usage of icache_cc1
+dcache_power_cc1       36623267.7643 # total power usage of dcache_cc1
+dcache2_power_cc1      12674539.5352 # total power usage of dcache2_cc1
+alu_power_cc1          30767385.0876 # total power usage of alu_cc1
+resultbus_power_cc1    122150797.4925 # total power usage of resultbus_cc1
+clock_power_cc1        148910516.2170 # total power usage of clock_cc1
+avg_rename_power_cc1         1.1211 # avg power usage of rename unit_cc1
+avg_bpred_power_cc1          0.8553 # avg power usage of bpred unit_cc1
+avg_window_power_cc1        34.6951 # avg power usage of instruction window_cc1
+avg_lsq_power_cc1            3.2867 # avg power usage of lsq_cc1
+avg_regfile_power_cc1        5.9990 # avg power usage of arch. regfile_cc1
+avg_icache_power_cc1         3.1210 # avg power usage of icache_cc1
+avg_dcache_power_cc1         6.6680 # avg power usage of dcache_cc1
+avg_dcache2_power_cc1        2.3077 # avg power usage of dcache2_cc1
+avg_alu_power_cc1            5.6018 # avg power usage of alu_cc1
+avg_resultbus_power_cc1      22.2400 # avg power usage of resultbus_cc1
+avg_clock_power_cc1         27.1121 # avg power usage of clock_cc1
+fetch_stage_power_cc1  21839293.6201 # total power usage of fetch stage_cc1
+dispatch_stage_power_cc1 6157752.6162 # total power usage of dispatch stage_cc1
+issue_stage_power_cc1  410827104.9814 # total power usage of issue stage_cc1
+avg_fetch_power_cc1          3.9763 # average power of fetch unit per cycle_cc1
+avg_dispatch_power_cc1       1.1211 # average power of dispatch unit per cycle_cc1
+avg_issue_power_cc1         74.7992 # average power of issue unit per cycle_cc1
+total_power_cycle_cc1  620683668.9474 # total power per cycle_cc1
+avg_total_power_cycle_cc1     113.0077 # average total power per cycle_cc1
+avg_total_power_insn_cc1      27.5550 # average total power per insn_cc1
+rename_power_cc2       4490050.6732 # total power usage of rename unit_cc2
+bpred_power_cc2        2829525.3949 # total power usage of bpred unit_cc2
+window_power_cc2       139153623.1732 # total power usage of instruction window_cc2
+lsq_power_cc2          14697160.3257 # total power usage of lsq_cc2
+regfile_power_cc2      5725247.7495 # total power usage of arch. regfile_cc2
+icache_power_cc2       17141769.0397 # total power usage of icache_cc2
+dcache_power_cc2       31429247.4616 # total power usage of dcache_cc2
+dcache2_power_cc2      11364513.8781 # total power usage of dcache2_cc2
+alu_power_cc2          23832709.6718 # total power usage of alu_cc2
+resultbus_power_cc2    65511642.5795 # total power usage of resultbus_cc2
+clock_power_cc2        99507280.4200 # total power usage of clock_cc2
+avg_rename_power_cc2         0.8175 # avg power usage of rename unit_cc2
+avg_bpred_power_cc2          0.5152 # avg power usage of bpred unit_cc2
+avg_window_power_cc2        25.3357 # avg power usage of instruction window_cc2
+avg_lsq_power_cc2            2.6759 # avg power usage of instruction lsq_cc2
+avg_regfile_power_cc2        1.0424 # avg power usage of arch. regfile_cc2
+avg_icache_power_cc2         3.1210 # avg power usage of icache_cc2
+avg_dcache_power_cc2         5.7223 # avg power usage of dcache_cc2
+avg_dcache2_power_cc2        2.0691 # avg power usage of dcache2_cc2
+avg_alu_power_cc2            4.3392 # avg power usage of alu_cc2
+avg_resultbus_power_cc2      11.9277 # avg power usage of resultbus_cc2
+avg_clock_power_cc2         18.1173 # avg power usage of clock_cc2
+fetch_stage_power_cc2  19971294.4346 # total power usage of fetch stage_cc2
+dispatch_stage_power_cc2 4490050.6732 # total power usage of dispatch stage_cc2
+issue_stage_power_cc2  285988897.0900 # total power usage of issue stage_cc2
+avg_fetch_power_cc2          3.6362 # average power of fetch unit per cycle_cc2
+avg_dispatch_power_cc2       0.8175 # average power of dispatch unit per cycle_cc2
+avg_issue_power_cc2         52.0699 # average power of issue unit per cycle_cc2
+total_power_cycle_cc2  415682770.3672 # total power per cycle_cc2
+avg_total_power_cycle_cc2      75.6833 # average total power per cycle_cc2
+avg_total_power_insn_cc2      18.4541 # average total power per insn_cc2
+rename_power_cc3       4750133.9745 # total power usage of rename unit_cc3
+bpred_power_cc3        4852863.2149 # total power usage of bpred unit_cc3
+window_power_cc3       140371317.3115 # total power usage of instruction window_cc3
+lsq_power_cc3          17355805.1702 # total power usage of lsq_cc3
+regfile_power_cc3      7057978.2631 # total power usage of arch. regfile_cc3
+icache_power_cc3       17864874.2073 # total power usage of icache_cc3
+dcache_power_cc3       33135523.3845 # total power usage of dcache_cc3
+dcache2_power_cc3      18506719.0333 # total power usage of dcache2_cc3
+alu_power_cc3          31159222.3388 # total power usage of alu_cc3
+resultbus_power_cc3    67425769.4809 # total power usage of resultbus_cc3
+clock_power_cc3        105522192.8132 # total power usage of clock_cc3
+avg_rename_power_cc3         0.8649 # avg power usage of rename unit_cc3
+avg_bpred_power_cc3          0.8836 # avg power usage of bpred unit_cc3
+avg_window_power_cc3        25.5574 # avg power usage of instruction window_cc3
+avg_lsq_power_cc3            3.1600 # avg power usage of instruction lsq_cc3
+avg_regfile_power_cc3        1.2850 # avg power usage of arch. regfile_cc3
+avg_icache_power_cc3         3.2527 # avg power usage of icache_cc3
+avg_dcache_power_cc3         6.0330 # avg power usage of dcache_cc3
+avg_dcache2_power_cc3        3.3695 # avg power usage of dcache2_cc3
+avg_alu_power_cc3            5.6732 # avg power usage of alu_cc3
+avg_resultbus_power_cc3      12.2762 # avg power usage of resultbus_cc3
+avg_clock_power_cc3         19.2124 # avg power usage of clock_cc3
+fetch_stage_power_cc3  22717737.4223 # total power usage of fetch stage_cc3
+dispatch_stage_power_cc3 4750133.9745 # total power usage of dispatch stage_cc3
+issue_stage_power_cc3  307954356.7191 # total power usage of issue stage_cc3
+avg_fetch_power_cc3          4.1362 # average power of fetch unit per cycle_cc3
+avg_dispatch_power_cc3       0.8649 # average power of dispatch unit per cycle_cc3
+avg_issue_power_cc3         56.0692 # average power of issue unit per cycle_cc3
+total_power_cycle_cc3  448002399.1922 # total power per cycle_cc3
+avg_total_power_cycle_cc3      81.5677 # average total power per cycle_cc3
+avg_total_power_insn_cc3      19.8889 # average total power per insn_cc3
+total_rename_access        22525239 # total number accesses of rename unit
+total_bpred_access          1251137 # total number accesses of bpred unit
+total_window_access        72555237 # total number accesses of instruction window
+total_lsq_access            7482571 # total number accesses of load/store queue
+total_regfile_access       16928430 # total number accesses of arch. regfile
+total_icache_access        24404969 # total number accesses of icache
+total_dcache_access         6796999 # total number accesses of dcache
+total_dcache2_access        1492704 # total number accesses of dcache2
+total_alu_access           19193750 # total number accesses of alu
+total_resultbus_access     20825600 # total number accesses of resultbus
+avg_rename_access            4.1012 # avg number accesses of rename unit
+avg_bpred_access             0.2278 # avg number accesses of bpred unit
+avg_window_access           13.2101 # avg number accesses of instruction window
+avg_lsq_access               1.3623 # avg number accesses of lsq
+avg_regfile_access           3.0822 # avg number accesses of arch. regfile
+avg_icache_access            4.4434 # avg number accesses of icache
+avg_dcache_access            1.2375 # avg number accesses of dcache
+avg_dcache2_access           0.2718 # avg number accesses of dcache2
+avg_alu_access               3.4946 # avg number accesses of alu
+avg_resultbus_access         3.7917 # avg number accesses of resultbus
+max_rename_access                 8 # max number accesses of rename unit
+max_bpred_access                  8 # max number accesses of bpred unit
+max_window_access                47 # max number accesses of instruction window
+max_lsq_access                    8 # max number accesses of load/store queue
+max_regfile_access               32 # max number accesses of arch. regfile
+max_icache_access                 8 # max number accesses of icache
+max_dcache_access                 4 # max number accesses of dcache
+max_dcache2_access                8 # max number accesses of dcache2
+max_alu_access                    8 # max number accesses of alu
+max_resultbus_access             31 # max number accesses of resultbus
+max_cycle_power_cc1        247.4059 # maximum cycle power usage of cc1
+max_cycle_power_cc2        232.9179 # maximum cycle power usage of cc2
+max_cycle_power_cc3        236.1664 # maximum cycle power usage of cc3
+
+
+******* SMT STATS *******
+THROUGHPUT IPC: 3.3159
+IPC[0]: 1.7844
+IPC[1]: 0.6713
+IPC[2]: 0.6868
+IPC[3]: 0.1733
+
+Avg. curPerf: 0.7115
